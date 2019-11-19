@@ -1,0 +1,44 @@
+﻿@{ 
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="~/Assets/images/favicon.ico" />
+    <link rel="icon" href="~/Assets/images/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" href="~/Assets/images/favicon-32x32.png" sizes="32x32" />
+    <link rel="stylesheet"
+          href="https://unpkg.com/bootstrap-select@1.13.12/dist/css/bootstrap-select.min.css" />
+    <link rel="stylesheet"
+          href="https://unpkg.com/flatpickr@4.6.3/dist/flatpickr.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+    <link rel="stylesheet"
+          href="@Html.Raw("https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css")" />
+    <link rel="stylesheet" href="~/Assets/styles.css" />
+</head>
+<body class="ec min-vh-100" id="top">
+    <noscript>Please enable javascript to get the best experience.</noscript>
+    @Html.Partial("~/Views/Shared/Partials/Navbar.cshtml")
+    <main class="ec-main">
+        @RenderBody()
+    </main>
+    @Html.Partial("~/Views/Shared/Partials/Footer.cshtml")
+    <script src="https://www.unpkg.com/feather-icons@4.24.1/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-select@1.13.12/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://unpkg.com/flatpickr@4.6.3/dist/flatpickr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="@Html.Raw("https://unpkg.com/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js")"></script>
+    <script src="~/Assets/bundle.js" async defer></script>
+</body>
+</html>
+

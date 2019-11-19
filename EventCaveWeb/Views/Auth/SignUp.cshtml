@@ -1,0 +1,54 @@
+﻿@model EventCaveWeb.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Sign up | Event Cave";
+    Layout = "~/Views/Shared/AlternativeLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-xl-4 d-flex flex-column justify-content-center min-vh-100 p-4">
+            <div class="d-flex flex-column mb-4">
+                <h3 class="mb-0 font-weight-bold">Join us</h3>
+                <a class="text-muted" href="@Url.Action("Index", "Home")">Back to homepage</a>
+            </div>
+            @using (Html.BeginForm("SignUp", "Auth", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.FirstName)
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.LastName)
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword)
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+                <div class="form-group mt-4">
+                    <button class="btn btn-primary w-100">Sign up</button>
+                </div>
+                <div class="text-center mt-4">
+                    <small class="text-center">
+                        Already a member?
+                        <a class="text-primary" href="@Url.Action("SignIn", "Auth")">Sign in</a>
+                    </small>
+                </div>
+            }
+        </div>
+    </div>
+</div>

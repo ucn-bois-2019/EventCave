@@ -1,0 +1,247 @@
+﻿@{
+    ViewBag.Title = "Event cave | The last event catalogue you'll ever need";
+}
+<section class="jumbotron d-flex align-items-center justify-content-center position-relative rounded-0 mb-0 ec-showcase" style="background-image: url(/Assets/images/showcase.jpg)">
+    <div class="container">
+        <h1 class="display-4 mb-4 font-weight-bold text-white text-shadow">
+            Feeling bored?
+        </h1>
+        <form class="bg-white p-3 rounded">
+            <div class="form-row">
+                <div class="col-xl-3 form-group mb-xl-0 ec-showcase-form-group">
+                    <input class="form-control border-0 mb-xl-0 rounded-0 ec-showcase-form-control"
+                           type="text"
+                           placeholder="What are you loooking for?" />
+                </div>
+                <div class="col-xl-3 form-group mb-xl-0 ec-showcase-form-group">
+                    <input class="form-control border-0 rounded-0 ec-showcase-form-control"
+                           type="text"
+                           placeholder="Location" />
+                </div>
+                <div class="col-xl-2 form-group mb-xl-0 ec-showcase-form-group">
+                    <input class="form-control border-0 rounded-0 ec-showcase-form-control"
+                           type="date"
+                           placeholder="When?" />
+                </div>
+                <div class="col-xl-2 form-group mb-xl-0 ec-showcase-form-group">
+                    <select class="form-control border-0 rounded-0 ec-showcase-form-control">
+                        <option selected>Category</option>
+                        <option value="fun">Education</option>
+                        <option value="fun">Party</option>
+                        <option value="fun">Fashion & Shopping</option>
+                        <option value="fun">IT World</option>
+                    </select>
+                </div>
+                <div class="col-xl-2 form-group mb-0 ec-showcase-form-group">
+                    <button class="btn btn-block btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml", 
+            new ViewDataDictionary
+            {
+                { "Title", "Explore categories" },
+                { "ActionTitle", "See all" },
+                { "ActionUrl", "URL" }
+            }
+        )
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                @Html.Partial(
+                    "~/Views/Shared/Partials/Category.cshtml", 
+                    new ViewDataDictionary
+                    {
+                        { "Url", "url" },
+                        { "ImageUrl", "https://images.pexels.com/photos/698928/pexels-photo-698928.jpeg" },
+                        { "Title", "Education" },
+                        { "Description", "A better future starts here." }
+                    }
+                )
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/1089930/pexels-photo-1089930.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">Party</h5>
+                        <p class="card-text">
+                            We know where the best party is.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/1078958/pexels-photo-1078958.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">
+                            Fashion & Shopping
+                        </h5>
+                        <p class="card-text">
+                            Stay classy.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">IT World</h5>
+                        <p class="card-text">
+                            It works on my machine.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5 bg-light">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary
+            {
+                { "Title", "Upcomming events" },
+                { "ActionTitle", "See more" },
+                { "ActionUrl", "URL" }
+            }
+        )
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3">
+                @Html.Partial(
+                    "~/Views/Shared/Partials/Event.cshtml",
+                    new ViewDataDictionary
+                    {
+                        { "Url", "URL" },
+                        { "ImageUrl", "https://images.pexels.com/photos/2974657/pexels-photo-2974657.jpeg" },
+                        { "Title", "H&M Photoshooting" },
+                        { "Categories", new string[] { "Clothing", "Fashion", "Photography" } },
+                        { "Date", "Saturday, 11.12.2019" },
+                        { "Count", 126 },
+                        { "Address", "Plateauet 52, Aalborg 9000" }
+                    }
+                )
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <a href="/pages/event-detail.html" class="card shadow">
+                    <img class="card-img-top"
+                         src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2625742/pexels-photo-2625742.jpeg&w=768&h=768&fit=cover"
+                         alt="event.png" />
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">Aalborg City Tour</h5>
+                        <div class="mb-2">
+                            <div class="badge badge-primary">Exploring</div>
+                        </div>
+                        <small class="card-text text-muted">
+                            <div>Friday, 15.12.2019</div>
+                            <div>13 people going</div>
+                            <div>Aalborg 9000</div>
+                        </small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <a href="/pages/event-detail.html" class="card shadow">
+                    <img class="card-img-top"
+                         src="https://images.weserv.nl?url=https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg&w=256&h=256&fit=cover"
+                         alt="event.png" />
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">
+                            Python Django Crash Course
+                        </h5>
+                        <div class="mb-2">
+                            <div class="badge badge-primary">Learning</div>
+                            <div class="badge badge-primary">Programming</div>
+                        </div>
+                        <small class="card-text text-muted">
+                            <div>128 people going</div>
+                            <div>Plateauet 49</div>
+                        </small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <a href="/pages/event-detail.html" class="card shadow">
+                    <img class="card-img-top"
+                         src="https://images.weserv.nl?url=https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/11/lol-worlds-thumbnail-1-920x518.jpg&w=768&h=768&fit=cover"
+                         alt="event.png" />
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">
+                            League of Legends World Championship 2019
+                        </h5>
+                        <div class="mb-2">
+                            <div class="badge badge-primary">Esport</div>
+                            <div class="badge badge-primary">Gaming</div>
+                        </div>
+                        <small class="card-text text-muted">
+                            <div>99 people going</div>
+                            <div>Paris, France</div>
+                        </small>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
+            <h3 class="mb-0 font-weight-bold">Trending events</h3>
+            <a href="/pages/search.html" class="text-muted"><small>See more</small></a>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3">
+                <a href="/pages/event-detail.html" class="card shadow">
+                    <img class="card-img-top"
+                         src="https://images.weserv.nl?url=https://images.pexels.com/photos/3133688/pexels-photo-3133688.jpeg&w=768&h=768&fit=cover"
+                         alt="event.png" />
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">We Skating</h5>
+                        <div class="mb-2">
+                            <div class="badge badge-primary">Sport</div>
+                            <div class="badge badge-primary">Urban</div>
+                        </div>
+                        <small class="card-text text-muted">
+                            <div>Wednesday, 16.11.2019</div>
+                            <div>22 people going</div>
+                            <div>Plateauet 52</div>
+                        </small>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3">
+                <a href="/pages/event-detail.html" class="card shadow">
+                    <img class="card-img-top"
+                         src="https://images.weserv.nl?url=https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg&w=768&h=768&fit=cover"
+                         alt="event.png" />
+                    <div class="card-body">
+                        <h5 class="card-title font-weight-bold">
+                            Blokhus Beach Trip
+                        </h5>
+                        <div class="mb-2">
+                            <div class="badge badge-primary">Travelling</div>
+                            <div class="badge badge-primary">Sun</div>
+                        </div>
+                        <small class="card-text text-muted">
+                            <div>Thursday, 17.11.2019</div>
+                            <div>1 people going</div>
+                            <div>Blokhus Strand</div>
+                        </small>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

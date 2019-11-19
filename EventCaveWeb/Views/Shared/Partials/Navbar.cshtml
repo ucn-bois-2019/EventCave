@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+
+<header class="ec-header">
+    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light shadow-md ec-header-nav">
+        <a class="navbar-brand ec-header-nav-logo" href="@Url.Action("Index", "Home")">
+            <img class="img-fluid ec-header-nav-logo-image"
+                 src="~/Assets/images/logo.png"
+                 alt="event-cave-logo.png" />
+        </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="/pages/search.html">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link font-weight-bold" href="/pages/categories.html">Categories</a>
+                </li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="@Url.Action("Profile", "Users", new { UserName = User.Identity.Name })">My profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="@Url.Action("SignOut", "Auth")">Sign out</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="@Url.Action("SignIn", "Auth")">Sign in</a>
+                    </li>
+                }
+                <li class="nav-item ml-md-1">
+                    <a class="d-block d-md-none nav-link text-primary font-weight-bold"
+                       href="@Url.Action("Create", "Events")">Host event</a>
+                    <a class="btn btn-primary d-none d-md-inline-block text-uppercase"
+                       href="@Url.Action("Create", "Events")">Host event</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

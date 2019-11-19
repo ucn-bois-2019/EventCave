@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    @Html.Partial("~/Views/Shared/Head.cshtml")
+    <title>@ViewBag.Title</title>
+</head>
+<body class="ec ec-no-padding min-vh-100" id="top">
+    <noscript>Please enable javascript to get the best experience.</noscript>
+    <main class="ec-main">
+        @RenderBody()
+    </main>
+    @Html.Partial("~/Views/Shared/Scripts.cshtml")
+</body>
+</html>
+

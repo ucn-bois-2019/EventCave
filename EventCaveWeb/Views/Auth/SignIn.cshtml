@@ -1,0 +1,44 @@
+﻿@model EventCaveWeb.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Sign in | Event Cave";
+    Layout = "~/Views/Shared/AlternativeLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-xl-4 d-flex flex-column justify-content-center min-vh-100 p-4">
+            <div class="d-flex flex-column mb-4">
+                <h3 class="mb-0 font-weight-bold">Sign in</h3>
+                <a class="text-muted" href="@Url.Action("Index", "Home")">Back to homepage</a>
+            </div>
+            @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group form-check">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "form-check-input" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "form-check-label" })
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary w-100" type="submit">Sign in</button>
+                </div>
+                <div class="text-center mt-4">
+                    <small class="text-center">
+                        Don't have an account yet?
+                        <a class="text-primary" href="@Url.Action("SignUp", "Auth")">Sign up</a>
+                    </small>
+                </div>
+            }
+        </div>
+    </div>
+</div>
