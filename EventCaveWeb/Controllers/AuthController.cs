@@ -10,7 +10,6 @@ using EventCaveWeb.ViewModels;
 
 namespace EventCaveWeb.Controllers
 {
-    [RoutePrefix("")]
     public class AuthController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -50,7 +49,7 @@ namespace EventCaveWeb.Controllers
             }
         }
 
-        [Route("signin")]
+        [Route("SignIn")]
         [HttpGet]
         [AllowAnonymous]
         public ActionResult SignIn(string returnUrl)
@@ -59,7 +58,7 @@ namespace EventCaveWeb.Controllers
             return View();
         }
 
-        [Route("signin")]
+        [Route("SignIn")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -69,7 +68,7 @@ namespace EventCaveWeb.Controllers
             {
                 return View(model);
             }
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -81,7 +80,7 @@ namespace EventCaveWeb.Controllers
             }
         }
 
-        [Route("signup")]
+        [Route("SignUp")]
         [HttpGet]
         [AllowAnonymous]
         public ActionResult SignUp()
@@ -89,7 +88,7 @@ namespace EventCaveWeb.Controllers
             return View();
         }
 
-        [Route("signup")]
+        [Route("SignUp")]
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -97,7 +96,7 @@ namespace EventCaveWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { FirstName = model.FirstName, LastName = model.LastName, UserName = model.UserName, Email = model.Email, RegisteredAt = DateTime.Now };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RegisteredAt = DateTime.Now };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -109,7 +108,7 @@ namespace EventCaveWeb.Controllers
             return View(model);
         }
 
-        [Route("signout")]
+        [Route("SignOut")]
         [HttpGet]
         [Authorize]
         public ActionResult SignOut()
