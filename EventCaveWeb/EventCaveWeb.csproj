@@ -263,6 +263,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -282,11 +283,17 @@
     <Compile Include="Migrations\201911191326264_AddUserFollowers.Designer.cs">
       <DependentUpon>201911191326264_AddUserFollowers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911211235450_CategoriesAdded.cs" />
+    <Compile Include="Migrations\201911211235450_CategoriesAdded.Designer.cs">
+      <DependentUpon>201911211235450_CategoriesAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\EventViewModels.cs" />
     <Compile Include="ViewModels\AuthViewModels.cs" />
   </ItemGroup>
@@ -330,6 +337,7 @@
     <Content Include="Views\Shared\Scripts.cshtml" />
     <Content Include="Views\Shared\AlternativeLayout.cshtml" />
     <Content Include="Views\Users\Profile.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">
@@ -340,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911191326264_AddUserFollowers.resx">
       <DependentUpon>201911191326264_AddUserFollowers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911211235450_CategoriesAdded.resx">
+      <DependentUpon>201911211235450_CategoriesAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNet.Identity
+@model  IEnumerable<EventCaveWeb.Models.Category>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+    <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                        <a href="/pages/search.html" class="card shadow text-white">
+                            <img src="https://images.pexels.com/photos/1089930/pexels-photo-1089930.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                                 class="card-img"
+                                 alt="category-img" />
+                            <div class="card-img-overlay d-flex flex-column justify-content-end">
+                                <h5 class="card-title font-weight-bold">
+                                    @Html.DisplayNameFor(model => model.Name) 
+                                </h5>
+                                <p class="card-text">
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                }
+                
+       
+    </div>
+        }
+
+<section class="py-5">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary
+            {
+                { "Title", "Explore categories" },
+                { "ActionTitle", "See all" },
+                { "ActionUrl", "URL" }
+            }
+        )
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                @Html.Partial(
+                    "~/Views/Shared/Partials/Category.cshtml",
+                    new ViewDataDictionary
+                    {
+                        { "Url", "url" },
+                        { "ImageUrl", "https://images.pexels.com/photos/698928/pexels-photo-698928.jpeg" },
+                        { "Title", "Education" },
+                        { "Description", "A better future starts here." }
+                    }
+                )
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/1089930/pexels-photo-1089930.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">Party</h5>
+                        <p class="card-text">
+                            We know where the best party is.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/1078958/pexels-photo-1078958.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">
+                            Fashion & Shopping
+                        </h5>
+                        <p class="card-text">
+                            Stay classy.
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
+                <a href="/pages/search.html" class="card shadow text-white">
+                    <img src="https://images.pexels.com/photos/2047905/pexels-photo-2047905.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+                         class="card-img"
+                         alt="category-img" />
+                    <div class="card-img-overlay d-flex flex-column justify-content-end">
+                        <h5 class="card-title font-weight-bold">IT World</h5>
+                        <p class="card-text">
+                            It works on my machine.
+                        </p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

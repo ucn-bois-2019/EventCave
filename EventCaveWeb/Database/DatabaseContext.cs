@@ -13,6 +13,7 @@ namespace EventCaveWeb.Database
     public class DatabaseContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         public DatabaseContext() : base("DefaultConnection")
         {
