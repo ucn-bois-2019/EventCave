@@ -19,7 +19,6 @@ namespace EventCaveWeb.Models
         [Required]
         public DateTime RegisteredAt { get; set; }
         public virtual ICollection<Event> Events { get; set; }
-        public virtual ICollection<ApplicationUser> Followers { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);

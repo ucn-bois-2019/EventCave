@@ -7,13 +7,13 @@ namespace EventCaveWeb.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddedRelationsToUserAndEvent : IMigrationMetadata
+    public sealed partial class AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedRelationsToUserAndEvent));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories));
         
         string IMigrationMetadata.Id
         {
-            get { return "201911190049489_AddedRelationsToUserAndEvent"; }
+            get { return "201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories"; }
         }
         
         string IMigrationMetadata.Source

@@ -22,5 +22,7 @@ namespace EventCaveWeb.Models
         public DateTime CreatedAt { get; set; }
         [Required]
         public virtual ApplicationUser Host { get; set; }
+        public virtual ICollection<ApplicationUser> Attendees { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }

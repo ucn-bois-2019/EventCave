@@ -960,7 +960,6 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Extensions.P
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.xml
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.Cookies.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.Facebook.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
@@ -991,8 +990,6 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Ident
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csprojAssemblyReference.cache
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.Initial.resources
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedRelationsToUserAndEvent.resources
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddUserFollowers.resources
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.CopyComplete
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.dll
@@ -1162,3 +1159,4 @@ C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.dll
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.pdb
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.CategoriesAdded.resources
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resources

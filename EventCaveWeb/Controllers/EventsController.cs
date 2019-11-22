@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventCaveWeb.Controllers
 {
-    [RoutePrefix("events")]
+    [RoutePrefix("Events")]
     public class EventsController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -35,7 +35,7 @@ namespace EventCaveWeb.Controllers
             }
         }
 
-        [Route("search")]
+        [Route("Search")]
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Search(string keyword, string location, string date)
@@ -46,7 +46,7 @@ namespace EventCaveWeb.Controllers
             return View();
         }
 
-        [Route("create")]
+        [Route("Create")]
         [HttpGet]
         [Authorize]
         public ActionResult Create()
@@ -54,7 +54,7 @@ namespace EventCaveWeb.Controllers
             return View();
         }
 
-        [Route("create")]
+        [Route("Create")]
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]

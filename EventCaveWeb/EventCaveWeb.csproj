@@ -275,17 +275,9 @@
     <Compile Include="Migrations\201911190039108_Initial.Designer.cs">
       <DependentUpon>201911190039108_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911190049489_AddedRelationsToUserAndEvent.cs" />
-    <Compile Include="Migrations\201911190049489_AddedRelationsToUserAndEvent.Designer.cs">
-      <DependentUpon>201911190049489_AddedRelationsToUserAndEvent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911191326264_AddUserFollowers.cs" />
-    <Compile Include="Migrations\201911191326264_AddUserFollowers.Designer.cs">
-      <DependentUpon>201911191326264_AddUserFollowers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911211235450_CategoriesAdded.cs" />
-    <Compile Include="Migrations\201911211235450_CategoriesAdded.Designer.cs">
-      <DependentUpon>201911211235450_CategoriesAdded.cs</DependentUpon>
+    <Compile Include="Migrations\201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs" />
+    <Compile Include="Migrations\201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.Designer.cs">
+      <DependentUpon>201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -343,14 +335,8 @@
     <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">
       <DependentUpon>201911190039108_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911190049489_AddedRelationsToUserAndEvent.resx">
-      <DependentUpon>201911190049489_AddedRelationsToUserAndEvent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911191326264_AddUserFollowers.resx">
-      <DependentUpon>201911191326264_AddUserFollowers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911211235450_CategoriesAdded.resx">
-      <DependentUpon>201911211235450_CategoriesAdded.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resx">
+      <DependentUpon>201911221503335_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
