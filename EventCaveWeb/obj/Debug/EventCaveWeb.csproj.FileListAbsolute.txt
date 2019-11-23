@@ -1152,11 +1152,9 @@ C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Id
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csprojAssemblyReference.cache
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.Initial.resources
-C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedRelationsToUserAndEvent.resources
-C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddUserFollowers.resources
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.CopyComplete
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.dll
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.pdb
-C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.CategoriesAdded.resources
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resources
+C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resources

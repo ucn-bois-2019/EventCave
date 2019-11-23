@@ -8,11 +8,9 @@ namespace EventCaveWeb.ViewModels
 {
     public class CategoryViewModel
     {
-        [MaxLength(15)]
         [Required]
         public string Name { get; set; }
 
-        [MaxLength(50)]
         [Required]
         public string Description { get; set; }
 
