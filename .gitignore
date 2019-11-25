@@ -1,2 +1,6 @@
-// redundant files
+// visual studio config
 .vs/
+
+// generated files
+/EventCaveWeb/bin
+/EventCaveWeb/obj

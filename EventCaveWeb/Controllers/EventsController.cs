@@ -6,8 +6,6 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.EntityFrameworkCore;
 
 namespace EventCaveWeb.Controllers
 {
@@ -81,6 +79,17 @@ namespace EventCaveWeb.Controllers
                 }
             }
             return View();
+        }
+
+        [Route("{EventId}")]
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Detail(int EventId)
+        {
+            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            {
+                return View(db.Events.Find(EventId));
+            }
         }
     }
 }
