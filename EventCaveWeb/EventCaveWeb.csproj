@@ -330,12 +330,7 @@
     <Content Include="Views\Shared\Scripts.cshtml" />
     <Content Include="Views\Shared\AlternativeLayout.cshtml" />
     <Content Include="Views\Users\Profile.cshtml" />
-<<<<<<< Updated upstream
     <Content Include="Views\Categories\GetCategories.cshtml" />
-=======
-    <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\Events\Detail.cshtml" />
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">
