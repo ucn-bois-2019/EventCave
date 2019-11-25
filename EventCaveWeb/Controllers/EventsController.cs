@@ -82,5 +82,30 @@ namespace EventCaveWeb.Controllers
             }
             return View();
         }
+
+        [Route("{EventId}")]
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Detail(int EventId)
+        {
+            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            {
+                Event Event = db.Events.Find(EventId);
+                EventDetailViewModel EventDetailViewModel = new EventDetailViewModel()
+                {
+                    Name = Event.Name,
+                    Description = Event.Description,
+                    Location = Event.Location,
+                    Datetime = Event.Datetime,
+                    Public = Event.Public,
+                    Limit = Event.Limit,
+                    Host = Event.Host,
+                    AttendeeCount = Event.Attendees.Count,
+                    SpacesLeft = Event.Limit - Event.Attendees.Count,
+                    Categories = Event.Categories
+                };
+                return View(EventDetailViewModel);
+            }
+        }
     }
 }
