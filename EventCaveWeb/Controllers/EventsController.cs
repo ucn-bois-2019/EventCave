@@ -4,8 +4,10 @@ using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,10 +16,13 @@ namespace EventCaveWeb.Controllers
     [RoutePrefix("Events")]
     public class EventsController : Controller
     {
+
         private ApplicationUserManager _userManager;
 
         public EventsController()
-        { }
+        {
+        }
+
         public EventsController(ApplicationUserManager userManager)
         {
             UserManager = userManager;
@@ -25,14 +30,17 @@ namespace EventCaveWeb.Controllers
 
         public ApplicationUserManager UserManager
         {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+            private set { _userManager = value; }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Index(Event eventModel)
+        {
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            var events = db.Events.ToList();
+            return View(events);
         }
 
         [Route("Search")]
@@ -80,8 +88,10 @@ namespace EventCaveWeb.Controllers
                     return RedirectToAction("Index", "Home");
                 }
             }
+
             return View();
         }
+
 
         [Route("{EventId}")]
         [HttpGet]
@@ -107,5 +117,11 @@ namespace EventCaveWeb.Controllers
                 return View(EventDetailViewModel);
             }
         }
+
+
+
     }
+
+
 }
+

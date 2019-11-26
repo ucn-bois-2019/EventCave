@@ -322,7 +322,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ccc\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -339,8 +338,9 @@
     <Content Include="Views\Shared\Scripts.cshtml" />
     <Content Include="Views\Shared\AlternativeLayout.cshtml" />
     <Content Include="Views\Users\Profile.cshtml" />
-    <Content Include="Views\Categories\GetCategories.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Events\Detail.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">

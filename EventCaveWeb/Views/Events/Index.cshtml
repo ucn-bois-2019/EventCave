@@ -1,0 +1,51 @@
+﻿@using EventCaveWeb.Models
+@using Microsoft.AspNet.Identity
+@model  IEnumerable<EventCaveWeb.Models.Event>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<section class="py-5">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary
+            {
+                { "Title", "Explore events" },
+                { "ActionUrl", "URL" }
+            }
+            )
+
+
+
+        <div class="row">
+            @foreach (var events in Model)
+            {
+                <div class="col-md-6 col-lg-3 mb-3">
+                    <a href="/pages/event-detail.html" class="card shadow">
+                        <img class="card-img-top"
+                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2625742/pexels-photo-2625742.jpeg&w=768&h=768&fit=cover"
+                             alt="event.png" />
+                        <div class="card-body">
+                            <h5 class="card-title font-weight-bold">@Url.Content(events.Name)</h5>
+                            <div class="mb-2">
+                                <div class="badge badge-primary">
+                                    @foreach (var category in events.Categories)
+                                    {
+                                        @category.Name;
+                                    }
+                                </div>
+                            </div>
+                            <small class="card-text text-muted">
+                                <p><strong>Date & Time:</strong> @events.Datetime</p>
+                                <p><strong>Location:</strong> @Url.Content(events.Location)</p>
+                                <p><strong>Attendees:</strong> @events.Attendees.Count</p>
+                            </small>
+                        </div>
+                    </a>
+                </div>
+
+            }
+        </div>
+    </div>
+</section>

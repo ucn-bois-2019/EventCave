@@ -11,20 +11,19 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace EventCaveWeb.Controllers
 {
+    [RoutePrefix("Categories")]
     public class CategoriesController : Controller
     {
-        private  DatabaseContext db = new DatabaseContext();
 
-        [Route("Categories")]
         [HttpGet]
         [Authorize]
         [AllowAnonymous]
-        public ActionResult GetCategories(Category category)
+        public ActionResult Index(Category category)
         {
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             var categories = db.Categories.ToList();
             return View(categories);
         }
 
-    
     }
 }
