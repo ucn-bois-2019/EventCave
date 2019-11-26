@@ -8,8 +8,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.EntityFrameworkCore;
 
 namespace EventCaveWeb.Controllers
 {
@@ -103,6 +101,7 @@ namespace EventCaveWeb.Controllers
                 Event Event = db.Events.Find(EventId);
                 EventDetailViewModel EventDetailViewModel = new EventDetailViewModel()
                 {
+                    Id = Event.Id,
                     Name = Event.Name,
                     Description = Event.Description,
                     Location = Event.Location,
@@ -112,16 +111,56 @@ namespace EventCaveWeb.Controllers
                     Host = Event.Host,
                     AttendeeCount = Event.Attendees.Count,
                     SpacesLeft = Event.Limit - Event.Attendees.Count,
-                    Categories = Event.Categories
+                    Categories = Event.Categories,
                 };
+                bool going = false;
+                ApplicationUser user = null;
+                if (User.Identity.IsAuthenticated)
+                {
+                    user = db.Users.Find(User.Identity.GetUserId());
+                    if (user.Events.Where(e => e.Id == Event.Id).Any())
+                    {
+                        going = true;
+                    }
+                }
+                EventDetailViewModel.Going = going;
+                EventDetailViewModel.AuthenticatedUser = user;
+
                 return View(EventDetailViewModel);
             }
         }
 
+        [Route("AttendEvent")]
+        [HttpGet]
+        [Authorize]
+        public ActionResult AttendEvent(int eventId, string userId)
+        {
+            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            {
+                Event anEvent = db.Events.Find(eventId);
+                ApplicationUser user = db.Users.Find(userId);
+                anEvent.Attendees.Add(user);
+                user.Events.Add(anEvent);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
+        }
 
-
+        [Route("UnattendEvent")]
+        [HttpGet]
+        [Authorize]
+        public ActionResult UnattendEvent(int eventId, string userId)
+        {
+            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            {
+                Event anEvent = db.Events.Find(eventId);
+                ApplicationUser user = db.Users.Find(userId);
+                anEvent.Attendees.Remove(user);
+                user.Events.Remove(anEvent);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
-
-
 }
 

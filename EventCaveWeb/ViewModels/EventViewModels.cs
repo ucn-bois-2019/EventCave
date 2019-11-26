@@ -25,6 +25,7 @@ namespace EventCaveWeb.ViewModels
 
     public class EventDetailViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -35,5 +36,7 @@ namespace EventCaveWeb.ViewModels
         public int AttendeeCount { get; set; }
         public int SpacesLeft { get; set; }
         public ICollection<Category> Categories { get; set; }
+        public bool Going { get; set; }
+        public ApplicationUser AuthenticatedUser { get; set; }
     }
 }

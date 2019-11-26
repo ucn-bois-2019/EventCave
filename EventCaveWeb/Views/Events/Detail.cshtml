@@ -50,30 +50,51 @@
                         <i data-feather="calendar" class="text-danger mr-2"></i>
                         <span>@Model.Datetime</span>
                     </li>
-                    <li class="mb-2">
-                        <i data-feather="users" class="text-danger mr-2"></i>
-                        <span>@Model.AttendeeCount people attending</span>
-                    </li>
-                    <li class="mb-2">
-                        <i data-feather="target" class="text-danger mr-2"></i>
-                        <span>@Model.SpacesLeft places left</span>
-                    </li>
+                    @if (@Model.AttendeeCount == 1)
+                    {
+                        <li class="mb-2">
+                            <i data-feather="users" class="text-danger mr-2"></i>
+                            <span>@Model.AttendeeCount person attending</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="mb-2">
+                            <i data-feather="users" class="text-danger mr-2"></i>
+                            <span>@Model.AttendeeCount people attending</span>
+                        </li>
+                    }
+                    @if (@Model.Limit > 0)
+                    {
+                        <li class="mb-2">
+                            <i data-feather="target" class="text-danger mr-2"></i>
+                            <span>@Model.SpacesLeft places left</span>
+                        </li>
+                    }
+
                 </ul>
             </div>
             <!-- Actions -->
             <div class="btn-group">
-                <button class="btn btn-sm btn-primary">
-                    ✓ GOING
-                </button>
-                <button class="btn btn-sm btn-danger">
-                    ✗ NOT GOING
-                </button>
-                <button class="btn btn-sm border">
-                    ✓ INVITE
-                </button>
+                @if (@Model.Going)
+                {
+                    <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
+                       href="@Url.Action("UnattendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Unattend event</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
+                       href="@Url.Action("AttendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Attend event</a>
+                }
             </div>
             <hr />
             <!-- Description -->
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
+                <h5 class="mb-0 font-weight-bold">
+                    Description
+                </h5>
+                <a href="#top" class="text-muted"> <small>Back to top</small></a>
+            </div>
             <div>
                 @Model.Description
             </div>
@@ -91,14 +112,10 @@
                          alt="Jack London"
                          class="rounded-circle mr-4" />
                     <div class="media-body">
-                        <span class="font-weight-bolder">Jessica Lena</span>
+                        <span class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</span>
                         <p class="mb-0 text-muted">
                             <small>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                                Doloremque assumenda sit veniam consequatur commodi corrupti
-                                vitae facilis repellat aliquam quae numquam laudantium
-                                dolorum, eius similique sunt, repudiandae tenetur sequi
-                                aperiam!
+                                @Model.Host.Bio
                             </small>
                         </p>
                     </div>
