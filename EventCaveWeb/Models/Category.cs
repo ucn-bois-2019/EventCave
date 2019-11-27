@@ -20,5 +20,6 @@ namespace EventCaveWeb.Models
 
         [Required]
         public string Image { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
     }
 }
