@@ -1,13 +1,15 @@
-﻿<a href="@ViewBag.Url" class="card shadow">
+﻿@using EventCaveWeb.Models
+
+<a href="@ViewBag.Url" class="card shadow">
     <img class="card-img-top"
          src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl)"
          alt="event-image.png" />
     <div class="card-body">
         <h5 class="card-title font-weight-bold">@ViewBag.Title</h5>
         <div class="mb-2">
-            @foreach (var category in ViewBag.Categories)
+            @foreach (Category category in ViewBag.Categories)
             {
-                <div class="badge badge-primary">@category</div>
+                <div class="badge badge-primary">@category.Name</div>
             }
         </div>
         <div class="card-text text-muted">

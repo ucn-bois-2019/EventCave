@@ -79,18 +79,17 @@
             {
                 { "Title", "Random events" },
                 { "ActionTitle", "See more" },
-                { "ActionUrl", "URL" }
+                { "ActionUrl", "Events" }
             }
         )
         <div class="row">
             @foreach (var @event in Model.RandomEvents)
             {
-                string imageLink = "https://images.weserv.nl/?url=https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png&w=768&h=768&fit=cover";
+                string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
                 if (@event.Images != null)
                 {
-                    imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://images.weserv.nl/?url=https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png&w=768&h=768&fit=cover";
+                    imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
                 }
-
 
                 <div class="col-md-6 col-lg-3 mb-3">
                     @Html.Partial(
