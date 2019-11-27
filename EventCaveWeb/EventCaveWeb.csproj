@@ -303,6 +303,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Imgur.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\UserProfileViewModels.cs" />
     <Compile Include="ViewModels\EventViewModels.cs" />
     <Compile Include="ViewModels\AuthViewModels.cs" />

@@ -1,107 +1,107 @@
 ﻿@model EventCaveWeb.ViewModels.EventDetailViewModel
-@{ 
+@{
     ViewBag.Title = $"{Model.Name} | Event Cave";
 }
-<main class="ec-main">
-    <section>
-        <div data-slider>
-            @foreach (var Image in Model.Images)
+
+<section>
+    <div data-slider>
+        @foreach (var Image in Model.Images)
+        {
+            <img src="@String.Format("https://images.weserv.nl?url={0}&w=569&h=320&fit=cover", Image.Link)"
+                 alt="slider-image"
+                 data-src="@Image.Link"
+                 data-fancybox="@Model.Name"
+                 data-slider-image />
+        }
+    </div>
+    <div class="container py-5">
+        <!-- Title -->
+        <h1 class="font-weight-bold">@Model.Name</h1>
+        <!-- Categories -->
+        <div class="mb-3">
+            @foreach (var Category in @Model.Categories)
             {
-                <img src="@String.Format("https://images.weserv.nl?url={0}&w=569&h=320&fit=cover", Image.Link)"
-                     alt="slider-image"
-                     data-src="@Image.Link"
-                     data-fancybox="@Model.Name"
-                     data-slider-image />
+                <span class="badge badge-primary">@Category.Name</span>
             }
         </div>
-        <div class="container py-5">
-            <!-- Title -->
-            <h1 class="font-weight-bold">@Model.Name</h1>
-            <!-- Categories -->
-            <div class="mb-3">
-                @foreach (var Category in @Model.Categories)
+        <!-- Event info -->
+        <div>
+            <ul class="list-unstyled text-muted">
+                <li class="mb-2">
+                    <i data-feather="calendar" class="text-danger mr-2"></i>
+                    <span>@Model.Datetime</span>
+                </li>
+                @if (@Model.AttendeeCount == 1)
                 {
-                    <span class="badge badge-primary">@Category.Name</span>
-                }
-            </div>
-            <!-- Event info -->
-            <div>
-                <ul class="list-unstyled text-muted">
                     <li class="mb-2">
-                        <i data-feather="calendar" class="text-danger mr-2"></i>
-                        <span>@Model.Datetime</span>
+                        <i data-feather="users" class="text-danger mr-2"></i>
+                        <span>@Model.AttendeeCount person attending</span>
                     </li>
-                    @if (@Model.AttendeeCount == 1)
-                    {
-                        <li class="mb-2">
-                            <i data-feather="users" class="text-danger mr-2"></i>
-                            <span>@Model.AttendeeCount person attending</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="mb-2">
-                            <i data-feather="users" class="text-danger mr-2"></i>
-                            <span>@Model.AttendeeCount people attending</span>
-                        </li>
-                    }
-                    @if (@Model.Limit > 0)
-                    {
-                        <li class="mb-2">
-                            <i data-feather="target" class="text-danger mr-2"></i>
-                            <span>@Model.SpacesLeft places left</span>
-                        </li>
-                    }
-
-                </ul>
-            </div>
-            <!-- Actions -->
-            <div class="btn-group">
-                @if (@Model.Going)
-                {
-                    <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                       href="@Url.Action("UnattendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Unattend event</a>
                 }
                 else
                 {
-                    <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                       href="@Url.Action("AttendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Attend event</a>
+                    <li class="mb-2">
+                        <i data-feather="users" class="text-danger mr-2"></i>
+                        <span>@Model.AttendeeCount people attending</span>
+                    </li>
                 }
-            </div>
-            <hr />
-            <!-- Description -->
+                @if (@Model.Limit > 0)
+                {
+                    <li class="mb-2">
+                        <i data-feather="target" class="text-danger mr-2"></i>
+                        <span>@Model.SpacesLeft places left</span>
+                    </li>
+                }
+
+            </ul>
+        </div>
+        <!-- Actions -->
+        <div class="btn-group">
+            @if (@Model.Going)
+            {
+                <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
+                   href="@Url.Action("UnattendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Unattend event</a>
+            }
+            else
+            {
+                <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
+                   href="@Url.Action("AttendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Attend event</a>
+            }
+        </div>
+        <hr />
+        <!-- Description -->
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
+            <h5 class="mb-0 font-weight-bold">
+                Description
+            </h5>
+            <a href="#top" class="text-muted"> <small>Back to top</small></a>
+        </div>
+        <div>
+            @Model.Description
+        </div>
+        <hr />
+        <!-- Hosted by -->
+        <div>
             <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
                 <h5 class="mb-0 font-weight-bold">
-                    Description
+                    Hosted by
                 </h5>
                 <a href="#top" class="text-muted"> <small>Back to top</small></a>
             </div>
-            <div>
-                @Model.Description
-            </div>
-            <hr />
-            <!-- Hosted by -->
-            <div>
-                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                    <h5 class="mb-0 font-weight-bold">
-                        Hosted by
-                    </h5>
-                    <a href="#top" class="text-muted"> <small>Back to top</small></a>
-                </div>
-                <div class="media">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=92&w=92&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-4" />
-                    <div class="media-body">
-                        <span class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</span>
-                        <p class="mb-0 text-muted">
-                            <small>
-                                @Model.Host.Bio
-                            </small>
-                        </p>
-                    </div>
+            <div class="media">
+                <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=92&w=92&fit=cover"
+                     alt="Jack London"
+                     class="rounded-circle mr-4" />
+                <div class="media-body">
+                    <span class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</span>
+                    <p class="mb-0 text-muted">
+                        <small>
+                            @Model.Host.Bio
+                        </small>
+                    </p>
                 </div>
             </div>
         </div>
-    </section>
-</main>
+    </div>
+</section>
+

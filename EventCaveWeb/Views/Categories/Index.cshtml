@@ -1,36 +1,36 @@
 ﻿@using Microsoft.AspNet.Identity
 @model  IEnumerable<EventCaveWeb.Models.Category>
-    @{
-        ViewBag.Title = "Categories";
-        Layout = "~/Views/Shared/Layout.cshtml";
-    }
-    <section class="py-5">
-        <div class="container">
-            @Html.Partial(
-                "~/Views/Shared/Partials/Title.cshtml",
-                new ViewDataDictionary
-                {
-                    { "Title", "Explore categories" },
-                    { "ActionUrl", "URL" }
-                }
-                )
-            <div class="row">
-                @foreach (var category in Model)
-                {
-                    <div class="col-md-6 col-lg-3 mb-3">
-                        @Html.Partial(
-                            "~/Views/Shared/Partials/Category.cshtml",
-                            new ViewDataDictionary
-                            {
-                                { "Url", "URL" },
-                                { "ImageUrl", category.Image },
-                                { "Title", category.Name },
-                                { "Description", category.Description }
-                            }
-                        )
-                    </div>
-                }
-            </div>
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<section class="py-5">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary
+            {
+                { "Title", "Explore categories" },
+                { "ActionUrl", "URL" }
+            }
+            )
+        <div class="row">
+            @foreach (var category in Model)
+            {
+                <div class="col-md-6 col-lg-3 mb-3">
+                    @Html.Partial(
+                        "~/Views/Shared/Partials/Category.cshtml",
+                        new ViewDataDictionary
+                        {
+                            { "Url", "URL" },
+                            { "ImageUrl", category.Image },
+                            { "Title", category.Name },
+                            { "Description", category.Description }
+                        }
+                    )
+                </div>
+            }
         </div>
-    </section>
+    </div>
+</section>
 

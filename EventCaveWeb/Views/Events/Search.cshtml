@@ -1,3 +1,38 @@
-﻿<h1>@ViewBag.Keyword</h1>
-<h1>@ViewBag.Location</h1>
-<h1>@ViewBag.Date</h1>
+﻿@model  IEnumerable<EventCaveWeb.Models.Event>
+@{
+    ViewBag.Title = "Search results | Event Cave";
+}
+
+<section class="py-5">
+    <div class="container">
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary
+            {
+                { "Title", $"Here is your search result" },
+                { "ActionTitle", "Adjust your search criteria"  },
+                { "ActionUrl", Url.Action("Index", "Home") }
+            }
+        )
+        <div class="row">
+            @foreach (var Event in Model)
+            {
+                <div class="col-md-6 col-lg-3 mb-3">
+                    @Html.Partial(
+                        "~/Views/Shared/Partials/Event.cshtml",
+                        new ViewDataDictionary
+                        {
+                            { "Url", Url.Action("Detail", "Events", new { EventId = Event.Id }) },
+                            { "ImageUrl", "https://images.pexels.com/photos/2974657/pexels-photo-2974657.jpeg" },
+                            { "Title", Event.Name },
+                            { "Categories", new string[] { "Clothing", "Fashion", "Photography" } },
+                            { "Date", Event.Datetime },
+                            { "Count", Event.Attendees.Count },
+                            { "Address", Event.Location }
+                        }
+                    )
+                </div>
+            }
+        </div>
+    </div>
+</section>

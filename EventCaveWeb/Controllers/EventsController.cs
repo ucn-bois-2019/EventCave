@@ -45,12 +45,11 @@ namespace EventCaveWeb.Controllers
         [Route("Search")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Search(string keyword, string location, string date)
+        public ActionResult Search(string keyword, string location, DateTime date)
         {
-            ViewBag.Keyword = keyword;
-            ViewBag.Location = location;
-            ViewBag.Date = date;
-            return View();
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            var events = db.Events.Where(e => e.Name.Equals(keyword)).Where(e => e.Location.Equals(location));
+            return View(events.ToList());
         }
 
         [Route("Create")]
