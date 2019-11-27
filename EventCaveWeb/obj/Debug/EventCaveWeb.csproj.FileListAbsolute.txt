@@ -1342,3 +1342,6 @@ C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.pdb
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedImagesToEventAndUser.resources
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.dll
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.xml
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\RestSharp.dll
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\RestSharp.xml
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedImagesToEventAndUser.resources
