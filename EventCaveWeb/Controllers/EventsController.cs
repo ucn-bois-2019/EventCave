@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using EventCaveWeb.Utils;
 
 namespace EventCaveWeb.Controllers
 {
@@ -76,18 +77,71 @@ namespace EventCaveWeb.Controllers
                         Description = model.Description,
                         Location = model.Location,
                         Datetime = model.Datetime,
-                        Public = model.Public,
                         Limit = model.Limit,
                         CreatedAt = DateTime.Now,
-                        Host = UserManager.FindById(User.Identity.GetUserId())
+                        Host = UserManager.FindById(User.Identity.GetUserId()),
+                        Images = model.Images
                     };
                     db.Events.Add(Event);
                     db.SaveChanges();
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Detail", "Events", new { EventId = Event.Id });
                 }
             }
 
             return View();
+        }
+
+        [Route("{EventId}/Edit")]
+        [HttpGet]
+        [Authorize]
+        public ActionResult Edit(int EventId)
+        {
+            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            {
+                Event Event = db.Events.Find(EventId);
+                if (Event.Host.Id != User.Identity.GetUserId())
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                CreateUpdateEventViewModel CreateUpdateEventViewModel = new CreateUpdateEventViewModel()
+                {
+                    Name = Event.Name,
+                    Description = Event.Description,
+                    Location = Event.Location,
+                    Datetime = Event.Datetime,
+                    Limit = Event.Limit,
+                    Images = Event.Images
+                };
+                return View(CreateUpdateEventViewModel);
+            }
+        }
+
+        [Route("{EventId}/Edit")]
+        [HttpPost]
+        [Authorize]
+        public ActionResult Edit(int EventId, CreateUpdateEventViewModel CreateUpdateEventViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+                {
+
+                    Event Event = db.Events.Find(EventId);
+                    if (Event == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    Event.Name = CreateUpdateEventViewModel.Name;
+                    Event.Description = CreateUpdateEventViewModel.Description;
+                    Event.Location = CreateUpdateEventViewModel.Location;
+                    Event.Datetime = CreateUpdateEventViewModel.Datetime;
+                    Event.Limit = CreateUpdateEventViewModel.Limit;
+                    Event.Images = CreateUpdateEventViewModel.Images;
+                    db.SaveChanges();
+                }
+
+            }
+            return RedirectToAction("Edit", "Events", new { EventId = EventId });
         }
 
 
@@ -106,12 +160,12 @@ namespace EventCaveWeb.Controllers
                     Description = Event.Description,
                     Location = Event.Location,
                     Datetime = Event.Datetime,
-                    Public = Event.Public,
                     Limit = Event.Limit,
                     Host = Event.Host,
                     AttendeeCount = Event.Attendees.Count,
                     SpacesLeft = Event.Limit - Event.Attendees.Count,
                     Categories = Event.Categories,
+                    Images = Imgur.Instance.GetAlbumImages(Event.Images)
                 };
                 bool going = false;
                 ApplicationUser user = null;
@@ -135,15 +189,16 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult AttendEvent(int eventId, string userId)
         {
+            Event anEvent = null;
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                Event anEvent = db.Events.Find(eventId);
+                anEvent = db.Events.Find(eventId);
                 ApplicationUser user = db.Users.Find(userId);
                 anEvent.Attendees.Add(user);
                 user.Events.Add(anEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });
         }
 
         [Route("UnattendEvent")]
@@ -151,15 +206,16 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult UnattendEvent(int eventId, string userId)
         {
+            Event anEvent = null;
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                Event anEvent = db.Events.Find(eventId);
+                anEvent = db.Events.Find(eventId);
                 ApplicationUser user = db.Users.Find(userId);
                 anEvent.Attendees.Remove(user);
                 user.Events.Remove(anEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });
         }
     }
 }

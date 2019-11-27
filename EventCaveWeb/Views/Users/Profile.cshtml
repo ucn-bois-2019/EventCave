@@ -1,85 +1,67 @@
 ﻿@using Microsoft.AspNet.Identity
-@model EventCaveWeb.Models.ApplicationUser
+@model EventCaveWeb.ViewModels.DetailUserProfileViewModel
 @{
     ViewBag.Title = "Profile | Event Cave";
 }
 <section class="py-5">
     <div class="container">
         <!-- User -->
-        <div class="align-items-center">
-            <div class="container mt-4 mb-4">
-                <div class="row align-items-center">
-                    <p class="col-lg-4 text-center">
-                        <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=192&w=192&fit=cover"
-                             alt="Profile Image"
-                             class="rounded" />
-                    </p>
-                    <div class="container-fluid col-lg-8">
-                        <div class="row align-items-center">
-                            <p class="col-md text-center">
-                                @Html.DisplayFor(model => model.FirstName)
-                                @Html.DisplayFor(model => model.LastName)
-                            </p>
-                            <p class="col-md text-center">
-                                @Html.DisplayFor(model => model.Email)
-                            </p>
-                            @if (User.Identity.Name == @Model.UserName)
-                            {
-                                <p class="col-md text-center">
-                                    <a class="btn btn-primary" href="#">Edit profile</a>
-                                </p>
-                            }
-                            else
-                            {
-                                // add unfollow button if a user is already followed
-                                <p class="col-md text-center">
-                                    <a class="btn btn-primary" href="#">Follow</a>
-                                </p>
-                            }
-                        </div>
-                        <div class="row align-items-center">
-                            <p class="col-md text-center text-primary">
-                                <a href="#followers" data-toggle="modal">
-                                    Followers (0)
-                                </a>
-                            </p>
-                            <p class="col-md text-center text-primary">
-                                <a href="#following" data-toggle="modal">
-                                    Following (0)
-                                </a>
-                            </p>
-                            <p class="col-md text-center text-primary">
-                                <a href="#">Hosted 0 events</a>
-                            </p>
-                        </div>
-                    </div>
+        <div class="media">
+            <img src="@String.Format("https://images.weserv.nl?url={0}&h=192&w=192&fit=cover&output=gif&n=-1", Model.Picture.Link)"
+                 alt="@Model.UserName"
+                 class="rounded mr-4" />
+            <div class="media-body">
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
+                    <h1 class="mb-0 font-weight-bold">
+                        @Html.DisplayFor(model => model.UserName)
+                    </h1>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Edit", "Users", new { username = User.Identity.Name })" class="text-muted">
+                            <small>Edit profile</small>
+                        </a>
+                    }
                 </div>
+                <ul class="list-unstyled text-muted">
+                    <li class="mb-2">
+                        <i data-feather="calendar" class="text-danger mr-2"></i>
+                        <span>Member since @Model.RegisteredAt</span>
+                    </li>
+                    <li class="mb-2">
+                        <i data-feather="calendar" class="text-danger mr-2"></i>
+                        <span>Hosted 52 events</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <hr />
         <!-- Description -->
         <div>
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                <h5 class="mb-0 font-weight-bold">
-                    Description
-                </h5>
-                <a href="#top" class="text-muted"> <small>Back to top</small></a>
-            </div>
-            <div>
-                <p class="text-muted font-weight-light">
-                    @Html.DisplayFor(model => model.Bio)
-                </p>
-            </div>
+            @Html.Partial(
+                "~/Views/Shared/Partials/Title.cshtml",
+                new ViewDataDictionary
+                {
+                    { "Title", "Description" },
+                    { "ActionTitle", "Back to top" },
+                    { "ActionUrl", "#top" }
+                }
+            )
+            <p class="text-muted font-weight-light">
+                @Html.DisplayFor(model => model.Bio)
+            </p>
         </div>
         <hr />
         <!-- Events -->
         <div>
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                <h5 class="mb-0 font-weight-bold">
-                    Hosted events
-                </h5>
-                <a href="#top" class="text-muted"> <small>Back to top</small></a>
-            </div>
+            @Html.Partial(
+                "~/Views/Shared/Partials/Title.cshtml",
+                new ViewDataDictionary
+                {
+                    { "Title", "Hosted events" },
+                    { "ActionTitle", "Back to top" },
+                    { "ActionUrl", "#top" }
+                }
+            )
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-3">
                     <a href="/pages/event-detail.html" class="card shadow">
@@ -207,12 +189,15 @@
         </div>
         <hr>
         <div>
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                <h5 class="mb-0 font-weight-bold">
-                    Private events I am invited to
-                </h5>
-                <a href="#top" class="text-muted"> <small>Back to top</small></a>
-            </div>
+            @Html.Partial(
+                "~/Views/Shared/Partials/Title.cshtml",
+                new ViewDataDictionary
+                {
+                    { "Title", "Events I am attending" },
+                    { "ActionTitle", "Back to top" },
+                    { "ActionUrl", "#top" }
+                }
+            )
             <div class="row">
                 <div class="col-md-6 col-lg-3 mb-3">
                     <a href="/pages/event-detail.html" class="card shadow">
@@ -340,152 +325,3 @@
         </div>
     </div>
 </section>
-
-<!-- Followers modal  -->
-<div class="modal fade" id="followers" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Followers</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Follow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Following modal  -->
-<div class="modal fade" id="following" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Following</h5>
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-                <hr />
-                <div class="media align-items-center">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=64&w=64&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-3" />
-                    <div class="media-body d-flex justify-content-between align-items-center">
-                        <a href="/pages/user-profile.html" class="font-weight-bolder">Jessica Lena</a>
-                        <a href="" class="btn btn-small border">Unfollow</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

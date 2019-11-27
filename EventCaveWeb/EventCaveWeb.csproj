@@ -154,6 +154,9 @@
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
       <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -288,13 +291,19 @@
     <Compile Include="Migrations\201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.Designer.cs">
       <DependentUpon>201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911262316079_AddedImagesToEventAndUser.cs" />
+    <Compile Include="Migrations\201911262316079_AddedImagesToEventAndUser.Designer.cs">
+      <DependentUpon>201911262316079_AddedImagesToEventAndUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\Imgur.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\UserProfileViewModels.cs" />
     <Compile Include="ViewModels\EventViewModels.cs" />
     <Compile Include="ViewModels\AuthViewModels.cs" />
   </ItemGroup>
@@ -341,6 +350,9 @@
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Events\Detail.cshtml" />
     <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">
@@ -348,6 +360,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resx">
       <DependentUpon>201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911262316079_AddedImagesToEventAndUser.resx">
+      <DependentUpon>201911262316079_AddedImagesToEventAndUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

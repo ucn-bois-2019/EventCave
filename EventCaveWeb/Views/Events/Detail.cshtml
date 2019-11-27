@@ -1,23 +1,18 @@
 ﻿@model EventCaveWeb.ViewModels.EventDetailViewModel
-
+@{ 
+    ViewBag.Title = $"{Model.Name} | Event Cave";
+}
 <main class="ec-main">
     <section>
         <div data-slider>
-            <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg&w=569&h=320&fit=cover"
-                 alt="slider-image"
-                 data-src="https://images.pexels.com/photos/1313814/pexels-photo-1313814.jpeg"
-                 data-fancybox="replace-with-event-name"
-                 data-slider-image />
-            <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/1153976/pexels-photo-1153976.jpeg&w=569&h=320&fit=cover"
-                 alt="slider-image"
-                 data-src="https://images.pexels.com/photos/1153976/pexels-photo-1153976.jpeg"
-                 data-fancybox="replace-with-event-name"
-                 data-slider-image />
-            <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/1162983/pexels-photo-1162983.jpeg&w=569&h=320&fit=cover"
-                 alt="slider-image"
-                 data-src="https://images.pexels.com/photos/1162983/pexels-photo-1162983.jpeg"
-                 data-fancybox="replace-with-event-name"
-                 data-slider-image />
+            @foreach (var Image in Model.Images)
+            {
+                <img src="@String.Format("https://images.weserv.nl?url={0}&w=569&h=320&fit=cover", Image.Link)"
+                     alt="slider-image"
+                     data-src="@Image.Link"
+                     data-fancybox="@Model.Name"
+                     data-slider-image />
+            }
         </div>
         <div class="container py-5">
             <!-- Title -->
@@ -32,20 +27,6 @@
             <!-- Event info -->
             <div>
                 <ul class="list-unstyled text-muted">
-                    @if (@Model.Public)
-                    {
-                        <li class="mb-2">
-                            <i data-feather="eye" class="text-danger mr-2"></i>
-                            <span>Public</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="mb-2">
-                            <i data-feather="eye" class="text-danger mr-2"></i>
-                            <span>Private</span>
-                        </li>
-                    }
                     <li class="mb-2">
                         <i data-feather="calendar" class="text-danger mr-2"></i>
                         <span>@Model.Datetime</span>
@@ -116,61 +97,6 @@
                         <p class="mb-0 text-muted">
                             <small>
                                 @Model.Host.Bio
-                            </small>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <hr />
-            <!-- Comments -->
-            <div>
-                <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                    <h5 class="mb-0 font-weight-bold">
-                        Comments
-                    </h5>
-                    <a href="#top" class="text-muted"> <small>Back to top</small></a>
-                </div>
-                <div class="media">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg&h=92&w=92&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-4" />
-                    <div class="media-body">
-                        <p class="font-weight-bolder">
-                            <span class="badge badge-primary">Pinned by host</span>
-                            <br />
-                            <span class="mr-2">
-                                Dagmar Waltman
-                            </span>
-                            <small>12.11.2019 11:54</small>
-                        </p>
-                        <p class="mb-0 text-muted">
-                            <small>
-                                One morning, when Gregor Samsa woke from troubled dreams, he
-                                found himself transformed in his bed into a horrible vermin.
-                                He lay on his armour-like back, and if he lifted his head a
-                                little he could see his brown belly, slightly domed and
-                                divided by arches into stiff sections.
-                            </small>
-                        </p>
-                    </div>
-                </div>
-                <hr />
-                <div class="media">
-                    <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg&h=92&w=92&fit=cover"
-                         alt="Jack London"
-                         class="rounded-circle mr-4" />
-                    <div class="media-body">
-                        <p class="font-weight-bolder">
-                            <span class="mr-2">
-                                Jackson Moe
-                            </span>
-                            <small>12.11.2019 11:41</small>
-                        </p>
-                        <p class="mb-0 text-muted">
-                            <small>
-                                Samsa was a travelling salesman - and above it there hung a
-                                picture that he had recently cut out of an illustrated
-                                magazine and housed in a nice, gilded frame.
                             </small>
                         </p>
                     </div>

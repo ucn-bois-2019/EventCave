@@ -1,4 +1,5 @@
 ﻿using EventCaveWeb.Models;
+using EventCaveWeb.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,15 +12,12 @@ namespace EventCaveWeb.ViewModels
     {
         [Required]
         public string Name { get; set; }
-        [Required]
+        public string Images { get; set; }
         public string Description { get; set; }
         [Required]
         public string Location { get; set; }
         [Required]
         public DateTime Datetime { get; set; }
-        [Required]
-        public bool Public { get; set; }
-        [Required]
         public int Limit { get; set; }
     }
 
@@ -30,13 +28,14 @@ namespace EventCaveWeb.ViewModels
         public string Description { get; set; }
         public string Location { get; set; }
         public DateTime Datetime { get; set; }
-        public bool Public { get; set; }
         public int Limit { get; set; }
         public ApplicationUser Host { get; set; }
         public int AttendeeCount { get; set; }
         public int SpacesLeft { get; set; }
         public ICollection<Category> Categories { get; set; }
+        public IEnumerable<ImgurImage> Images { get; set; }
         public bool Going { get; set; }
         public ApplicationUser AuthenticatedUser { get; set; }
+        
     }
 }

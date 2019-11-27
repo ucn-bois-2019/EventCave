@@ -16,7 +16,6 @@ namespace EventCaveWeb.Controllers
     {
 
         [HttpGet]
-        [Authorize]
         [AllowAnonymous]
         public ActionResult Index(Category category)
         {

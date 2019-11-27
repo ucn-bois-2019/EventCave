@@ -14,28 +14,20 @@
                     { "ActionUrl", "URL" }
                 }
                 )
-
             <div class="row">
                 @foreach (var category in Model)
                 {
-                    <div class="col-md-6 col-lg-3 mb-3 mb-lg-4">
-                        <a href="/pages/search.html" class="card shadow text-white ">
-                            <div class="card" style="min-height: 350px">
-                                <img src="@Url.Content(category.Image)"
-                                     class="card-img img-fluid"
-                                     alt="category-img"
-                                     style="height: inherit;object-fit:cover" />
-                            </div>
-                            <div class="card-img-overlay d-flex flex-column justify-content-end">
-                                <h5 class="card-title font-weight-bold">
-                                    @Url.Content(category.Name)
-                                </h5>
-                                <p class="card-text">
-                                    @Url.Content(category.Description)
-                                </p>
-                            </div>
-
-                        </a>
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        @Html.Partial(
+                            "~/Views/Shared/Partials/Category.cshtml",
+                            new ViewDataDictionary
+                            {
+                                { "Url", "URL" },
+                                { "ImageUrl", category.Image },
+                                { "Title", category.Name },
+                                { "Description", category.Description }
+                            }
+                        )
                     </div>
                 }
             </div>
