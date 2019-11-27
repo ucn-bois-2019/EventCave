@@ -167,7 +167,7 @@ namespace EventCaveWeb.Controllers
                     Images = Imgur.Instance.GetAlbumImages(Event.Images)
                 };
                 bool going = false;
-                ApplicationUser user = null;
+                ApplicationUser user = new ApplicationUser();
                 if (User.Identity.IsAuthenticated)
                 {
                     user = db.Users.Find(User.Identity.GetUserId());

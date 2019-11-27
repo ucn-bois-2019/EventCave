@@ -17,5 +17,6 @@ namespace EventCaveWeb.ViewModels
         [Display(Prompt = "When?")]
         public DateTime DateTime { get; set; }
         public IQueryable<Category> Categories { get; set; }
+        public ICollection<Event> RandomEvents { get; set; }
     }
 }
