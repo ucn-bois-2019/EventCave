@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using EventCaveWeb.Utils
 @model EventCaveWeb.ViewModels.DetailUserProfileViewModel
 @{
     ViewBag.Title = "Profile | Event Cave";
@@ -51,142 +52,46 @@
             </p>
         </div>
         <hr />
-        <!-- Events -->
-        <div>
-            @Html.Partial(
-                "~/Views/Shared/Partials/Title.cshtml",
-                new ViewDataDictionary
-                {
-                    { "Title", "Hosted events" },
-                    { "ActionTitle", "Back to top" },
-                    { "ActionUrl", "#top" }
-                }
-            )
-            <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2974657/pexels-photo-2974657.jpeg&w=768&h=768&fit=cover"
-                             alt="event-image.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                H&M Photoshooting
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Clothing</div>
-                                <div class="badge badge-primary">Fashion</div>
-                                <div class="badge badge-primary">Photography</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Saturday, 16.12.2019</div>
-                                <div>51 people going</div>
-                                <div>Plateauet 52</div>
-                            </small>
+        <!-- Hosted Events -->
+        <section>
+            <div>
+                @Html.Partial(
+                    "~/Views/Shared/Partials/Title.cshtml",
+                    new ViewDataDictionary
+                    {
+                        { "Title", "Hosted events" },
+                        { "ActionTitle", "Back to top" },
+                        { "ActionUrl", "#top" }
+                    }
+                )
+                <div class="row">
+                    @foreach (var @event in Model.HostedEvents)
+                    {
+                        string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                        if (@event.Images != null)
+                        {
+                            imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                        }
+
+                        <div class="col-md-6 col-lg-3 mb-3">
+                            @Html.Partial(
+                                "~/Views/Shared/Partials/Event.cshtml",
+                                new ViewDataDictionary
+                                {
+                                    { "Id", @event.Id },
+                                    { "ImageUrl", imageLink },
+                                    { "Title", @event.Name },
+                                    { "Categories", @event.Categories },
+                                    { "Date", @event.Datetime },
+                                    { "Count", @event.Attendees.Count },
+                                    { "Address", @event.Location }
+                                }
+                            )
                         </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2625742/pexels-photo-2625742.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Aalborg City Tour
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Exploring</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Friday, 15.12.2019</div>
-                                <div>13 people going</div>
-                                <div>Aalborg 9000</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg&w=256&h=256&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Python Django Crash Course
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Learning</div>
-                                <div class="badge badge-primary">Programming</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>128 people going</div>
-                                <div>Plateauet 49</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/11/lol-worlds-thumbnail-1-920x518.jpg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                League of Legends World Championship 2019
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Esport</div>
-                                <div class="badge badge-primary">Gaming</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>99 people going</div>
-                                <div>Paris, France</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/3133688/pexels-photo-3133688.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">We Skating</h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Sport</div>
-                                <div class="badge badge-primary">Urban</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Wednesday, 16.11.2019</div>
-                                <div>22 people going</div>
-                                <div>Plateauet 52</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Blokhus Beach Trip
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Travelling</div>
-                                <div class="badge badge-primary">Sun</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Thursday, 17.11.2019</div>
-                                <div>1 people going</div>
-                                <div>Blokhus Strand</div>
-                            </small>
-                        </div>
-                    </a>
+                    }
                 </div>
             </div>
-        </div>
+        </section>
         <hr>
         <div>
             @Html.Partial(
@@ -199,128 +104,30 @@
                 }
             )
             <div class="row">
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2974657/pexels-photo-2974657.jpeg&w=768&h=768&fit=cover"
-                             alt="event-image.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                H&M Photoshooting
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Clothing</div>
-                                <div class="badge badge-primary">Fashion</div>
-                                <div class="badge badge-primary">Photography</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Saturday, 16.12.2019</div>
-                                <div>51 people going</div>
-                                <div>Plateauet 52</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2625742/pexels-photo-2625742.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Aalborg City Tour
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Exploring</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Friday, 15.12.2019</div>
-                                <div>13 people going</div>
-                                <div>Aalborg 9000</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg&w=256&h=256&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Python Django Crash Course
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Learning</div>
-                                <div class="badge badge-primary">Programming</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>128 people going</div>
-                                <div>Plateauet 49</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://ksassets.timeincuk.net/wp/uploads/sites/54/2019/11/lol-worlds-thumbnail-1-920x518.jpg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                League of Legends World Championship 2019
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Esport</div>
-                                <div class="badge badge-primary">Gaming</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>99 people going</div>
-                                <div>Paris, France</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/3133688/pexels-photo-3133688.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">We Skating</h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Sport</div>
-                                <div class="badge badge-primary">Urban</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Wednesday, 16.11.2019</div>
-                                <div>22 people going</div>
-                                <div>Plateauet 52</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl?url=https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">
-                                Blokhus Beach Trip
-                            </h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">Travelling</div>
-                                <div class="badge badge-primary">Sun</div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <div>Thursday, 17.11.2019</div>
-                                <div>1 people going</div>
-                                <div>Blokhus Strand</div>
-                            </small>
-                        </div>
-                    </a>
-                </div>
+                @foreach (var @event in Model.EventsEnrolledIn)
+                {
+                    string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                    if (@event.Images != null)
+                    {
+                        imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                    }
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        @Html.Partial(
+                            "~/Views/Shared/Partials/Event.cshtml",
+                            new ViewDataDictionary
+                            {
+                                { "Id", @event.Id },
+                                { "ImageUrl", imageLink },
+                                { "Title", @event.Name },
+                                { "Categories", @event.Categories },
+                                { "Date", @event.Datetime },
+                                { "Count", @event.Attendees.Count },
+                                { "Address", @event.Location }
+                            }
+                        )
+                    </div>
+                }
             </div>
         </div>
     </div>

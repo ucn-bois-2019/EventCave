@@ -1,4 +1,5 @@
-﻿using EventCaveWeb.Utils;
+﻿using EventCaveWeb.Models;
+using EventCaveWeb.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +14,8 @@ namespace EventCaveWeb.ViewModels
         public ImgurImage Picture;
         public string Bio { get; set; }
         public DateTime RegisteredAt { get; set; }
+        public ICollection<Event> HostedEvents { get; set; }
+        public ICollection<Event> EventsEnrolledIn { get; set; }
     }
 
     public class EditUserProfileViewModel

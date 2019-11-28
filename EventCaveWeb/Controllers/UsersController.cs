@@ -28,7 +28,9 @@ namespace EventCaveWeb.Controllers
                 UserName = user.UserName,
                 Picture = Imgur.Instance.GetImage(user.Picture),
                 Bio = user.Bio,
-                RegisteredAt = user.RegisteredAt
+                RegisteredAt = user.RegisteredAt,
+                HostedEvents = user.EventsHosted,
+                EventsEnrolledIn = user.EventsEnrolledIn
             };
             return View(detailUserProfileViewModel);
         }
@@ -100,8 +102,8 @@ namespace EventCaveWeb.Controllers
             if (ModelState.IsValid)
             {
                 await _userManager.ChangePasswordAsync(
-                    User.Identity.GetUserId(), 
-                    changeUserPasswordViewModel.OldPassword, 
+                    User.Identity.GetUserId(),
+                    changeUserPasswordViewModel.OldPassword,
                     changeUserPasswordViewModel.NewPassword
                 );
             }

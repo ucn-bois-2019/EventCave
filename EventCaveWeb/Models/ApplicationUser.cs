@@ -21,7 +21,8 @@ namespace EventCaveWeb.Models
         [Required]
         public DateTime RegisteredAt { get; set; }
 
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> EventsEnrolledIn { get; set; }
+        public virtual ICollection<Event> EventsHosted { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -1,4 +1,5 @@
-﻿@model  IEnumerable<EventCaveWeb.Models.Event>
+﻿@using EventCaveWeb.Utils
+@model  IEnumerable<EventCaveWeb.Models.Event>
 @{
     ViewBag.Title = "Search results | Event Cave";
 }
@@ -15,20 +16,26 @@
             }
         )
         <div class="row">
-            @foreach (var Event in Model)
+            @foreach (var @event in Model)
             {
+                string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                if (@event.Images != null)
+                {
+                    imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                }
+
                 <div class="col-md-6 col-lg-3 mb-3">
                     @Html.Partial(
                         "~/Views/Shared/Partials/Event.cshtml",
                         new ViewDataDictionary
                         {
-                            { "Url", Url.Action("Detail", "Events", new { EventId = Event.Id }) },
-                            { "ImageUrl", "https://images.pexels.com/photos/2974657/pexels-photo-2974657.jpeg" },
-                            { "Title", Event.Name },
-                            { "Categories", new string[] { "Clothing", "Fashion", "Photography" } },
-                            { "Date", Event.Datetime },
-                            { "Count", Event.Attendees.Count },
-                            { "Address", Event.Location }
+                            { "Id", @event.Id },
+                            { "ImageUrl", imageLink },
+                            { "Title", @event.Name },
+                            { "Categories", @event.Categories },
+                            { "Date", @event.Datetime },
+                            { "Count", @event.Attendees.Count },
+                            { "Address", @event.Location }
                         }
                     )
                 </div>

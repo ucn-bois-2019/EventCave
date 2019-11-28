@@ -171,7 +171,7 @@ namespace EventCaveWeb.Controllers
                 if (User.Identity.IsAuthenticated)
                 {
                     user = db.Users.Find(User.Identity.GetUserId());
-                    if (user.Events.Where(e => e.Id == Event.Id).Any())
+                    if (user.EventsEnrolledIn.Where(e => e.Id == Event.Id).Any())
                     {
                         going = true;
                     }
@@ -194,7 +194,7 @@ namespace EventCaveWeb.Controllers
                 anEvent = db.Events.Find(eventId);
                 ApplicationUser user = db.Users.Find(userId);
                 anEvent.Attendees.Add(user);
-                user.Events.Add(anEvent);
+                user.EventsEnrolledIn.Add(anEvent);
                 db.SaveChanges();
             }
             return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });
@@ -211,7 +211,7 @@ namespace EventCaveWeb.Controllers
                 anEvent = db.Events.Find(eventId);
                 ApplicationUser user = db.Users.Find(userId);
                 anEvent.Attendees.Remove(user);
-                user.Events.Remove(anEvent);
+                user.EventsEnrolledIn.Remove(anEvent);
                 db.SaveChanges();
             }
             return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });

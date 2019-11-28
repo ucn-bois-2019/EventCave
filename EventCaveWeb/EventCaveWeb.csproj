@@ -299,6 +299,10 @@
     <Compile Include="Migrations\201911272043037_AddedEventsToCategory.Designer.cs">
       <DependentUpon>201911272043037_AddedEventsToCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911281337278_AddedEventsHostedToUser.cs" />
+    <Compile Include="Migrations\201911281337278_AddedEventsHostedToUser.Designer.cs">
+      <DependentUpon>201911281337278_AddedEventsHostedToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Category.cs" />
@@ -371,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911272043037_AddedEventsToCategory.resx">
       <DependentUpon>201911272043037_AddedEventsToCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911281337278_AddedEventsHostedToUser.resx">
+      <DependentUpon>201911281337278_AddedEventsHostedToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

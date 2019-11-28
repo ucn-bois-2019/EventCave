@@ -49,3 +49,7 @@ C:\Users\michal\schoolProjects\EventCave\Core.Test\obj\Debug\Core.Test.csprojAss
 C:\Users\michal\schoolProjects\EventCave\Core.Test\obj\Debug\Core.Test.csproj.CopyComplete
 C:\Users\michal\schoolProjects\EventCave\Core.Test\obj\Debug\Core.Test.dll
 C:\Users\michal\schoolProjects\EventCave\Core.Test\obj\Debug\Core.Test.pdb
+C:\Users\michal\schoolProjects\EventCave\Core.Test\bin\Debug\RestSharp.dll
+C:\Users\michal\schoolProjects\EventCave\Core.Test\bin\Debug\Newtonsoft.Json.dll
+C:\Users\michal\schoolProjects\EventCave\Core.Test\bin\Debug\RestSharp.xml
+C:\Users\michal\schoolProjects\EventCave\Core.Test\bin\Debug\Newtonsoft.Json.xml
