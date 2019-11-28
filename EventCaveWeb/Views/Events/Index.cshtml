@@ -1,5 +1,6 @@
 ﻿@using EventCaveWeb.Models
 @using Microsoft.AspNet.Identity
+@using EventCaveWeb.Utils
 @model  IEnumerable<EventCaveWeb.Models.Event>
 @{
     ViewBag.Title = "Index";
@@ -16,32 +17,29 @@
             }
         )
         <div class="row">
-            @foreach (var events in Model)
+            @foreach (var @event in Model)
             {
-                <div class="col-md-6 col-lg-3 mb-3">
-                    <a href="/pages/event-detail.html" class="card shadow">
-                        <img class="card-img-top"
-                             src="https://images.weserv.nl/?url=https://images.pexels.com/photos/2625742/pexels-photo-2625742.jpeg&w=768&h=768&fit=cover"
-                             alt="event.png" />
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">@Url.Content(events.Name)</h5>
-                            <div class="mb-2">
-                                <div class="badge badge-primary">
-                                    @foreach (var category in events.Categories)
-                                    {
-                                        @category.Name;
-                                    }
-                                </div>
-                            </div>
-                            <small class="card-text text-muted">
-                                <p><strong>Date & Time:</strong> @events.Datetime</p>
-                                <p><strong>Location:</strong> @Url.Content(events.Location)</p>
-                                <p><strong>Attendees:</strong> @events.Attendees.Count</p>
-                            </small>
-                        </div>
-                    </a>
-                </div>
+                string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                if (@event.Images != null)
+                {
+                    imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
+                }
 
+                <div class="col-md-6 col-lg-3 mb-3">
+                    @Html.Partial(
+                        "~/Views/Shared/Partials/Event.cshtml",
+                        new ViewDataDictionary
+                        {
+                            { "Url", "Events/" + @event.Id },
+                            { "ImageUrl", imageLink },
+                            { "Title", @event.Name },
+                            { "Categories", @event.Categories },
+                            { "Date", @event.Datetime },
+                            { "Count", @event.Attendees.Count },
+                            { "Address", @event.Location }
+                        }
+                    )
+                </div>
             }
         </div>
     </div>
