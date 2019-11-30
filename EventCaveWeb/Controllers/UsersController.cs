@@ -4,9 +4,7 @@ using EventCaveWeb.Utils;
 using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -23,6 +21,16 @@ namespace EventCaveWeb.Controllers
         {
             var _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             ApplicationUser user = await _userManager.FindByNameAsync(username);
+            ICollection<UserEvent> userEvents = user.EventsEnrolledIn;
+            List<Event> eventsEnrolledIn = new List<Event>();
+            // TODO figure this out - loading events through the linking table
+            //using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            //{
+            //    foreach (UserEvent userEvent in userEvents)
+            //    {
+            //        eventsEnrolledIn.Add(db.Events.Find(userEvent.EventId));
+            //    }
+            //}
             DetailUserProfileViewModel detailUserProfileViewModel = new DetailUserProfileViewModel()
             {
                 UserName = user.UserName,
@@ -30,7 +38,7 @@ namespace EventCaveWeb.Controllers
                 Bio = user.Bio,
                 RegisteredAt = user.RegisteredAt,
                 HostedEvents = user.EventsHosted,
-                EventsEnrolledIn = user.EventsEnrolledIn
+                EventsEnrolledIn = eventsEnrolledIn
             };
             return View(detailUserProfileViewModel);
         }

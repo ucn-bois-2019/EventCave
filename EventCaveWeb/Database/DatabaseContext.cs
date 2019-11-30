@@ -14,6 +14,7 @@ namespace EventCaveWeb.Database
     {
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<UserEvent> UserEvents { get; set; }
 
         public DatabaseContext() : base("DefaultConnection")
         {

@@ -283,30 +283,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201911190039108_Initial.cs" />
-    <Compile Include="Migrations\201911190039108_Initial.Designer.cs">
-      <DependentUpon>201911190039108_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs" />
-    <Compile Include="Migrations\201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.Designer.cs">
-      <DependentUpon>201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911262316079_AddedImagesToEventAndUser.cs" />
-    <Compile Include="Migrations\201911262316079_AddedImagesToEventAndUser.Designer.cs">
-      <DependentUpon>201911262316079_AddedImagesToEventAndUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911272043037_AddedEventsToCategory.cs" />
-    <Compile Include="Migrations\201911272043037_AddedEventsToCategory.Designer.cs">
-      <DependentUpon>201911272043037_AddedEventsToCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201911281337278_AddedEventsHostedToUser.cs" />
-    <Compile Include="Migrations\201911281337278_AddedEventsHostedToUser.Designer.cs">
-      <DependentUpon>201911281337278_AddedEventsHostedToUser.cs</DependentUpon>
+    <Compile Include="Migrations\201911301609431_Initial.cs" />
+    <Compile Include="Migrations\201911301609431_Initial.Designer.cs">
+      <DependentUpon>201911301609431_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\UserEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\Imgur.cs" />
@@ -364,20 +349,8 @@
     <Content Include="Views\Users\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201911190039108_Initial.resx">
-      <DependentUpon>201911190039108_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resx">
-      <DependentUpon>201911251503255_AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911262316079_AddedImagesToEventAndUser.resx">
-      <DependentUpon>201911262316079_AddedImagesToEventAndUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911272043037_AddedEventsToCategory.resx">
-      <DependentUpon>201911272043037_AddedEventsToCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201911281337278_AddedEventsHostedToUser.resx">
-      <DependentUpon>201911281337278_AddedEventsHostedToUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911301609431_Initial.resx">
+      <DependentUpon>201911301609431_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -31,7 +31,7 @@ namespace EventCaveWeb.Models
         [Required]
         public virtual ApplicationUser Host { get; set; }
 
-        public virtual ICollection<ApplicationUser> Attendees { get; set; }
+        public virtual ICollection<UserEvent> Attendees { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
     }

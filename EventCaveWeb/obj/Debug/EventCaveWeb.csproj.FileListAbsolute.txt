@@ -989,8 +989,6 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Ident
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csprojAssemblyReference.cache
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.Initial.resources
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.CopyComplete
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.dll
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.pdb
@@ -1163,7 +1161,6 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Extensions.I
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNetCore.Cryptography.Internal.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Extensions.Identity.Core.xml
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resources
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.Extensions.Identity.Core.dll
@@ -1344,6 +1341,5 @@ C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.dll
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\RestSharp.dll
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\RestSharp.xml
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedImagesToEventAndUser.resources
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventsToCategory.resources
-C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventsHostedToUser.resources
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.Initial.resources
+C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
