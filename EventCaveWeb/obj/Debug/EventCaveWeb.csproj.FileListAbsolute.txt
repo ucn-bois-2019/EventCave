@@ -1344,3 +1344,5 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Mig
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\RestSharp.dll
 C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\RestSharp.xml
+C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\David\projects\EventCave\EventCave\EventCaveWeb\bin\Microsoft.Owin.Security.Cookies.xml
