@@ -1,5 +1,0 @@
-C:\Users\michal\schoolProjects\EventCave\Core\bin\Debug\Core.dll
-C:\Users\michal\schoolProjects\EventCave\Core\bin\Debug\Core.pdb
-C:\Users\michal\schoolProjects\EventCave\Core\obj\Debug\Core.csprojAssemblyReference.cache
-C:\Users\michal\schoolProjects\EventCave\Core\obj\Debug\Core.dll
-C:\Users\michal\schoolProjects\EventCave\Core\obj\Debug\Core.pdb
