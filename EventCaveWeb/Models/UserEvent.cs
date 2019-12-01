@@ -13,7 +13,7 @@ namespace EventCaveWeb.Models
         public string ApplicationUserId { get; set; }
         [Key, Column(Order = 2)]
         public int EventId { get; set; }
-        public ApplicationUser User { get; set; }
-        public Event Event { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public virtual Event Event { get; set; }
     }
 }

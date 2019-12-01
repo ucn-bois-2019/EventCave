@@ -14,7 +14,14 @@
         </div>
         <div class="card-text text-muted">
             <small class="d-block">@ViewBag.Date</small>
-            <small class="d-block">@ViewBag.Count people going</small>
+            @if (ViewBag.Count == 1)
+            {
+                <small class="d-block">@ViewBag.Count person going</small>
+            }
+            else
+            {
+                <small class="d-block">@ViewBag.Count people going</small>
+            }
             <small class="d-block">@ViewBag.Address</small>
         </div>
     </div>

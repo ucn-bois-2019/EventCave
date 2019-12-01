@@ -24,13 +24,12 @@ namespace EventCaveWeb.Controllers
             ICollection<UserEvent> userEvents = user.EventsEnrolledIn;
             List<Event> eventsEnrolledIn = new List<Event>();
             // TODO figure this out - loading events through the linking table
-            //using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
-            //{
-            //    foreach (UserEvent userEvent in userEvents)
-            //    {
-            //        eventsEnrolledIn.Add(db.Events.Find(userEvent.EventId));
-            //    }
-            //}
+
+            foreach (UserEvent userEvent in userEvents)
+            {
+                eventsEnrolledIn.Add(userEvent.Event);
+            }
+
             DetailUserProfileViewModel detailUserProfileViewModel = new DetailUserProfileViewModel()
             {
                 UserName = user.UserName,
