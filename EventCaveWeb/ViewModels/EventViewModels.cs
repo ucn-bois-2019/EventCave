@@ -19,6 +19,11 @@ namespace EventCaveWeb.ViewModels
         [Required]
         public DateTime Datetime { get; set; }
         public int Limit { get; set; }
+
+        public List<Category> Categories { get; set; }
+        public Category Category { get; set; }
+
+        public ICollection<Event> Events { get; set;  }
     }
 
     public class EventDetailViewModel

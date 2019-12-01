@@ -4,6 +4,8 @@ using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
+using System.Collections.Generic;
+using System.Drawing.Design;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -45,8 +47,9 @@ namespace EventCaveWeb.Controllers
         [Route("Search")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Search(string keyword, string location, DateTime date)
-        {
+        public ActionResult Search(string keyword, string location, DateTime date, Category category)
+        {   
+            
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             var events = db.Events.Where(e => e.Name.Equals(keyword)).Where(e => e.Location.Equals(location));
             return View(events.ToList());
@@ -57,7 +60,15 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            var categories = db.Categories.ToList();
+
+            var viewModel = new CreateUpdateEventViewModel
+            {
+                Categories = categories
+            };
+
+            return View(viewModel);
         }
 
         [Route("Create")]
@@ -66,10 +77,13 @@ namespace EventCaveWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateUpdateEventViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+
                 {
+                    
                     var Event = new Event
                     {
                         Name = model.Name,
@@ -77,6 +91,7 @@ namespace EventCaveWeb.Controllers
                         Location = model.Location,
                         Datetime = model.Datetime,
                         Limit = model.Limit,
+                        Categories = new List<Category>() {model.Category},
                         CreatedAt = DateTime.Now,
                         Host = UserManager.FindById(User.Identity.GetUserId()),
                         Images = model.Images
