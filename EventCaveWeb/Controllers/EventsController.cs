@@ -17,33 +17,6 @@ namespace EventCaveWeb.Controllers
     [RoutePrefix("Events")]
     public class EventsController : Controller
     {
-
-        private ApplicationUserManager _userManager;
-
-        public EventsController()
-        {
-        }
-
-        public EventsController(ApplicationUserManager userManager)
-        {
-            UserManager = userManager;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult Index(Event eventModel)
-        {
-            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-            var events = db.Events.ToList();
-            return View(events);
-        }
-
         [Route("Search")]
         [HttpGet]
         [AllowAnonymous]
@@ -60,14 +33,10 @@ namespace EventCaveWeb.Controllers
         public ActionResult Create()
         {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-            var categories = db.Categories.ToList();
-
-            var viewModel = new CreateUpdateEventViewModel
+            return View(new CreateUpdateEventViewModel
             {
-                Categories = categories
-            };
-
-            return View(viewModel);
+                Categories = db.Categories.ToList()
+            });
         }
 
         [Route("Create")]
@@ -76,116 +45,119 @@ namespace EventCaveWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateUpdateEventViewModel model)
         {
-
             if (ModelState.IsValid)
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
                 {
-                    var Event = new Event
+                    Event @event = new Event
                     {
                         Name = model.Name,
                         Description = model.Description,
                         Location = model.Location,
                         Datetime = model.Datetime,
                         Limit = model.Limit,
-                        Categories = db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList(),
+                        Categories = model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any()
+                                     ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
+                                     : new List<Category>(),
                         CreatedAt = DateTime.Now,
-                        Host = UserManager.FindById(User.Identity.GetUserId()),
+                        Host = db.Users.Find(User.Identity.GetUserId()),
                         Images = model.Images
                     };
-                    db.Events.Add(Event);
+                    db.Events.Add(@event);
                     db.SaveChanges();
                     Message.Create(Response, "Event was successfully created.");
-                    return RedirectToAction("Detail", "Events", new { EventId = Event.Id });
+                    return RedirectToAction("Detail", "Events", new { id = @event.Id });
                 }
             }
             return View();
         }
 
-        [Route("{EventId}/Edit")]
+        [Route("{id}/Edit")]
         [HttpGet]
         [Authorize]
-        public ActionResult Edit(int EventId)
+        public ActionResult Edit(int id)
         {
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                Event Event = db.Events.Find(EventId);
-                if (Event.Host.Id != User.Identity.GetUserId())
+                Event @event = db.Events.Find(id);
+                if (@event.Host.Id != User.Identity.GetUserId())
                 {
                     return RedirectToAction("Index", "Home");
                 }
                 CreateUpdateEventViewModel CreateUpdateEventViewModel = new CreateUpdateEventViewModel()
                 {
-                    Name = Event.Name,
-                    Description = Event.Description,
-                    Location = Event.Location,
-                    Datetime = Event.Datetime,
-                    Limit = Event.Limit,
+                    Name = @event.Name,
+                    Description = @event.Description,
+                    Location = @event.Location,
+                    Datetime = @event.Datetime,
+                    Limit = @event.Limit,
                     Categories = db.Categories.ToList(),
-                    SelectedCategoryIds = Event.Categories.ToList().Select(c => c.Id),
-                    Images = Event.Images
+                    SelectedCategoryIds = @event.Categories.ToList().Select(c => c.Id),
+                    Images = @event.Images
                 };
                 return View(CreateUpdateEventViewModel);
             }
         }
 
-        [Route("{EventId}/Edit")]
+        [Route("{id}/Edit")]
         [HttpPost]
         [Authorize]
-        public ActionResult Edit(int EventId, CreateUpdateEventViewModel CreateUpdateEventViewModel)
+        public ActionResult Edit(int id, CreateUpdateEventViewModel model)
         {
             if (ModelState.IsValid)
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
                 {
-                    Event Event = db.Events.Include("Categories").First(e => e.Id == EventId);
+                    Event Event = db.Events.Include("Categories").First(e => e.Id == id);
                     if (Event == null)
                     {
                         return HttpNotFound();
                     }
-                    Event.Name = CreateUpdateEventViewModel.Name;
-                    Event.Description = CreateUpdateEventViewModel.Description;
-                    Event.Location = CreateUpdateEventViewModel.Location;
-                    Event.Categories = db.Categories.Where(c => CreateUpdateEventViewModel.SelectedCategoryIds.Contains(c.Id)).ToList(); 
-                    Event.Datetime = CreateUpdateEventViewModel.Datetime;
-                    Event.Limit = CreateUpdateEventViewModel.Limit;
-                    Event.Images = CreateUpdateEventViewModel.Images;
+                    Event.Name = model.Name;
+                    Event.Description = model.Description;
+                    Event.Location = model.Location;
+                    Event.Categories = model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any()
+                                       ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
+                                       : new List<Category>();
+                    Event.Datetime = model.Datetime;
+                    Event.Limit = model.Limit;
+                    Event.Images = model.Images;
                     db.SaveChanges();
                     Message.Create(Response, "Event was successfully edited.");
                 }
             }
-            return RedirectToAction("Edit", "Events", new { EventId = EventId });
+            return RedirectToAction("Edit", "Events", new { id });
         }
 
 
-        [Route("{EventId}")]
+        [Route("{id}")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Detail(int EventId)
+        public ActionResult Detail(int id)
         {
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                Event Event = db.Events.Find(EventId);
+                Event @event = db.Events.Find(id);
                 EventDetailViewModel EventDetailViewModel = new EventDetailViewModel()
                 {
-                    Id = Event.Id,
-                    Name = Event.Name,
-                    Description = Event.Description,
-                    Location = Event.Location,
-                    Datetime = Event.Datetime,
-                    Limit = Event.Limit,
-                    Host = Event.Host,
-                    AttendeeCount = Event.Attendees.Count,
-                    SpacesLeft = Event.Limit - Event.Attendees.Count,
-                    Categories = Event.Categories,
-                    Images = Imgur.Instance.GetAlbumImages(Event.Images)
+                    Id = @event.Id,
+                    Name = @event.Name,
+                    Description = @event.Description,
+                    Location = @event.Location,
+                    Datetime = @event.Datetime,
+                    Limit = @event.Limit,
+                    Host = @event.Host,
+                    AttendeeCount = @event.Attendees.Count,
+                    SpacesLeft = @event.Limit - @event.Attendees.Count,
+                    Categories = @event.Categories,
+                    Images = Imgur.Instance.GetAlbumImages(@event.Images)
                 };
                 bool going = false;
                 ApplicationUser user = new ApplicationUser();
                 if (User.Identity.IsAuthenticated)
                 {
                     user = db.Users.Find(User.Identity.GetUserId());
-                    if (user.EventsEnrolledIn.Where(e => e.EventId == Event.Id).Any())
+                    if (user.EventsEnrolledIn.Where(e => e.EventId == @event.Id).Any())
                     {
                         going = true;
                     }

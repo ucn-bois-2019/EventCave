@@ -1,6 +1,6 @@
 ﻿@using EventCaveWeb.Models
 
-<a href="@Url.Action("Detail", "Events", new { EventId = ViewBag.Id})" class="card shadow">
+<a href="@Url.Action("Detail", "Events", new { id = ViewBag.Id})" class="card shadow">
     <img class="card-img-top"
          src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl)"
          alt="event-image.png" />
