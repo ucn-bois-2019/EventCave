@@ -1,5 +1,7 @@
 ﻿@model EventCaveWeb.ViewModels.CreateUpdateEventViewModel
-
+@{
+    ViewBag.Title = "Edit event | Event Cave";
+}
 @using (@Html.BeginForm("Edit", "Events"))
 {
     @Html.AntiForgeryToken()
@@ -7,14 +9,14 @@
 
     <section class="py-5">
         <div class="container">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                <h3 class="mb-0 font-weight-bold">
-                    Edit your event dear <span class="text-primary">host</span>
-                </h3>
-                <a href="@Url.Action("Index", "Home")" class="text-muted">
-                    <small>Back to homepage</small>
-                </a>
-            </div>
+            @Html.Partial(
+                "~/Views/Shared/Partials/Title.cshtml",
+                new ViewDataDictionary {
+                    { "Title", "Edit your event"},
+                    { "ActionTitle", "Back to detail" },
+                    { "ActionUrl", @Url.Action("Detail", "Events", new { id = Model.Id } ) }
+                }
+            )
             <hr class="my-4 my-lg-5" />
             <div class="row">
                 <div class="col-12 col-lg-4">

@@ -20,6 +20,7 @@ namespace EventCaveWeb.ViewModels
 
     public class EditUserProfileViewModel
     {
+        public string Username { get; set; }
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
@@ -37,6 +38,7 @@ namespace EventCaveWeb.ViewModels
 
     public class ChangeUserPasswordViewModel
     {
+        public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm your password")]

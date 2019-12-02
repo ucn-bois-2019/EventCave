@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 @model  IEnumerable<EventCaveWeb.Models.Category>
 @{
-    ViewBag.Title = "Categories";
+    ViewBag.Title = "Categories | Event Cave";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
 <section class="py-5">
@@ -22,7 +22,7 @@
                         "~/Views/Shared/Partials/Category.cshtml",
                         new ViewDataDictionary
                         {
-                            { "Url", "URL" },
+                            { "Url", Url.Action("Search", "Events", new { SelectedCategoryIds = category.Id }) },
                             { "ImageUrl", category.Image },
                             { "Title", category.Name },
                             { "Description", category.Description }

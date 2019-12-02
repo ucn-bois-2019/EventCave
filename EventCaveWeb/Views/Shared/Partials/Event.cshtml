@@ -2,7 +2,7 @@
 
 <a href="@Url.Action("Detail", "Events", new { id = ViewBag.Id})" class="card shadow">
     <img class="card-img-top"
-         src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl)"
+         src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl ?? "https://via.placeholder.com/768")"
          alt="event-image.png" />
     <div class="card-body">
         <h5 class="card-title font-weight-bold">@ViewBag.Title</h5>

@@ -10,6 +10,7 @@ namespace EventCaveWeb.ViewModels
 {
     public class CreateUpdateEventViewModel
     {
+        public int Id { get; set; }
         [Required]
         public string Name { get; set; }
         public string Images { get; set; }

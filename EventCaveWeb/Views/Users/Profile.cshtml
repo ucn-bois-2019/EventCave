@@ -75,19 +75,13 @@
                 <div class="row">
                     @foreach (var @event in Model.HostedEvents)
                     {
-                        string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
-                        if (@event.Images != null)
-                        {
-                            imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
-                        }
-
                         <div class="col-md-6 col-lg-3 mb-3">
                             @Html.Partial(
                                 "~/Views/Shared/Partials/Event.cshtml",
                                 new ViewDataDictionary
                                 {
                                     { "Id", @event.Id },
-                                    { "ImageUrl", imageLink },
+                                    { "ImageUrl", @event.Images != null ? Imgur.Instance.GetAlbumImages(@event.Images)[0].Link : null },
                                     { "Title", @event.Name },
                                     { "Categories", @event.Categories },
                                     { "Date", @event.Datetime },
@@ -114,19 +108,13 @@
             <div class="row">
                 @foreach (var @event in Model.EventsEnrolledIn)
                 {
-                    string imageLink = "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
-                    if (@event.Images != null)
-                    {
-                        imageLink = Imgur.Instance.GetAlbumImages(@event.Images)[0].Link ?? "https://www.softwarearge.com/wp-content/uploads/2018/09/no-image-icon-6.png";
-                    }
-
                     <div class="col-md-6 col-lg-3 mb-3">
                         @Html.Partial(
                             "~/Views/Shared/Partials/Event.cshtml",
                             new ViewDataDictionary
                             {
                                 { "Id", @event.Id },
-                                { "ImageUrl", imageLink },
+                                { "ImageUrl", @event.Images != null ? Imgur.Instance.GetAlbumImages(@event.Images)[0].Link : null },
                                 { "Title", @event.Name },
                                 { "Categories", @event.Categories },
                                 { "Date", @event.Datetime },

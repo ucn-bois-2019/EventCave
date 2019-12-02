@@ -21,21 +21,10 @@ namespace EventCaveWeb.Controllers
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             HomeViewModel homeViewModel = new HomeViewModel()
             {
-                Keyword = "",
-                Location = "",
-                DateTime = DateTime.Today,
-                Categories = db.Categories.Take(4),
+                Categories = db.Categories.ToList(),
                 RandomEvents = GetRandomEvents(db.Events, 4),
             };
             return View(homeViewModel);
-        }
-
-        [Route]
-        [HttpPost]
-        [AllowAnonymous]
-        public ActionResult SearchRedirect(HomeViewModel homeViewModel)
-        {
-            return RedirectToAction("Search", "Events", new { keyword = homeViewModel.Keyword, location = homeViewModel.Location, date = homeViewModel.DateTime });
         }
 
         public List<Event> GetRandomEvents(DbSet<Event> eventSet, int count)

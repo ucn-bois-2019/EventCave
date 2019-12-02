@@ -15,15 +15,14 @@
     </div>
     <div class="container py-5">
         <!-- Title -->
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-            <h1 class="font-weight-bold">@Model.Name</h1>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href="@Url.Action("Edit", "Events", new { id = Model.Id })" class="text-muted">
-                    <small>Edit event</small>
-                </a>
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary {
+                { "Title", Model.Name },
+                { "ActionTitle", User.Identity.IsAuthenticated ? "Edit event" : null },
+                { "ActionUrl", User.Identity.IsAuthenticated ? Url.Action("Edit", "Events", new { id = Model.Id }) : null }
             }
-        </div>
+        )
         <!-- Categories -->
         <div class="mb-3">
             @foreach (var Category in @Model.Categories)
@@ -77,24 +76,28 @@
         </div>
         <hr />
         <!-- Description -->
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-            <h5 class="mb-0 font-weight-bold">
-                Description
-            </h5>
-            <a href="#top" class="text-muted"> <small>Back to top</small></a>
-        </div>
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary {
+                { "Title", "Description"},
+                { "ActionTitle", "Back to top" },
+                { "ActionUrl", "#top" }
+            }
+        )
         <div>
             @Model.Description
         </div>
         <hr />
         <!-- Hosted by -->
         <div>
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-                <h5 class="mb-0 font-weight-bold">
-                    Hosted by
-                </h5>
-                <a href="#top" class="text-muted"> <small>Back to top</small></a>
-            </div>
+            @Html.Partial(
+                "~/Views/Shared/Partials/Title.cshtml",
+                new ViewDataDictionary {
+                    { "Title", "Hosted by"},
+                    { "ActionTitle", "Back to top" },
+                    { "ActionUrl", "#top" }
+                }
+            )
             <div class="media">
                 <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=92&w=92&fit=cover"
                      alt="Jack London"

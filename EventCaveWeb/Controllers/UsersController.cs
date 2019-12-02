@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace EventCaveWeb.Controllers
@@ -19,17 +20,8 @@ namespace EventCaveWeb.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> Profile(string username)
         {
-            var _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user = await _userManager.FindByNameAsync(username);
-            ICollection<UserEvent> userEvents = user.EventsEnrolledIn;
-            List<Event> eventsEnrolledIn = new List<Event>();
-            // TODO figure this out - loading events through the linking table
-
-            foreach (UserEvent userEvent in userEvents)
-            {
-                eventsEnrolledIn.Add(userEvent.Event);
-            }
-
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == username);
             DetailUserProfileViewModel detailUserProfileViewModel = new DetailUserProfileViewModel()
             {
                 UserName = user.UserName,
@@ -37,7 +29,7 @@ namespace EventCaveWeb.Controllers
                 Bio = user.Bio,
                 RegisteredAt = user.RegisteredAt,
                 HostedEvents = user.EventsHosted,
-                EventsEnrolledIn = eventsEnrolledIn
+                EventsEnrolledIn = user.EventsEnrolledIn.Select(ue => ue.Event).ToList()
             };
             return View(detailUserProfileViewModel);
         }
@@ -51,10 +43,11 @@ namespace EventCaveWeb.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user = await _userManager.FindByNameAsync(username);
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == username);
             EditUserProfileViewModel editUserProfileViewModel = new EditUserProfileViewModel()
             {
+                Username = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
@@ -67,22 +60,22 @@ namespace EventCaveWeb.Controllers
         [Route("{username}/Edit")]
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Edit(string username, EditUserProfileViewModel editUserProfileViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "Username, FirstName, LastName, Email, Picture, Bio")] EditUserProfileViewModel model)
         {
-            var _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
-            if (username != User.Identity.Name)
+            if (model.Username != User.Identity.Name)
             {
                 return RedirectToAction("Index", "Home");
             }
+            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == model.Username);
             if (ModelState.IsValid)
             {
-                user.FirstName = editUserProfileViewModel.FirstName;
-                user.LastName = editUserProfileViewModel.LastName;
-                user.Email = editUserProfileViewModel.Email;
-                user.Picture = editUserProfileViewModel.Picture;
-                user.Bio = editUserProfileViewModel.Bio;
-                _userManager.Update(user);
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Email = model.Email;
+                user.Picture = model.Picture;
+                user.Bio = model.Bio;
+                db.SaveChanges();
             }
             Message.Create(Response, "Profile was successfully edited.");
             return RedirectToAction("Profile", "Users", new { username = user.UserName });
@@ -93,30 +86,30 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult ChangePassword(string username)
         {
-            return View();
+            return View(new ChangeUserPasswordViewModel() { Username = username });
         }
 
         [Route("{username}/Edit/ChangePassword")]
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> ChangePassword(string username, ChangeUserPasswordViewModel changeUserPasswordViewModel)
+        public async Task<ActionResult> ChangePassword([Bind(Include = "Username,OldPassword,NewPassword,RepeatedPassword")] ChangeUserPasswordViewModel model)
         {
-            if (username != User.Identity.Name)
+            if (model.Username != User.Identity.Name)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Profile", "Users", new { username = model.Username });
             }
-            var _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            ApplicationUser user = await userManager.FindByIdAsync(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
-                await _userManager.ChangePasswordAsync(
-                    User.Identity.GetUserId(),
-                    changeUserPasswordViewModel.OldPassword,
-                    changeUserPasswordViewModel.NewPassword
+                await userManager.ChangePasswordAsync(
+                    user.Id,
+                    model.OldPassword,
+                    model.NewPassword
                 );
             }
             Message.Create(Response, "Password was successfully changed.");
-            return RedirectToAction("Profile", "Users", new { username = user.UserName });
+            return RedirectToAction("Profile", "Users", new { username = model.Username });
         }
     }
 }

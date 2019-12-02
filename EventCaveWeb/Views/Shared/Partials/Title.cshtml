@@ -1,6 +1,9 @@
 ﻿<div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
     <h3 class="mb-0 font-weight-bold">@ViewBag.Title</h3>
-    <a href="@ViewBag.ActionUrl" class="text-muted">
-        <small>@ViewBag.ActionTitle</small>
-    </a>
+    @if (ViewBag.ActionTitle != null && ViewBag.ActionUrl != null)
+    {
+        <a class="text-muted" href="@ViewBag.ActionUrl">
+            <small>@ViewBag.ActionTitle</small>
+        </a>
+    }
 </div>

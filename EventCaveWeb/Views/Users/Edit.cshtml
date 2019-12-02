@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Edit your user profile | Event Cave";
 }
-
 @using (Html.BeginForm("Edit", "Users", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -15,8 +14,8 @@
                     new ViewDataDictionary
                     {
                         { "Title", "Edit your user profile" },
-                        { "ActionTitle", "Back to homepage" },
-                        { "ActionUrl", Url.Action("Index", "Home") }
+                        { "ActionTitle", "Back to your profile" },
+                        { "ActionUrl", Url.Action("Profile", "Users", new { username = Model.Username }) }
                     }
                 )
                 <hr class="my-4 my-lg-5" />

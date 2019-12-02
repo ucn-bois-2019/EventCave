@@ -9,9 +9,8 @@
         <h1 class="display-4 mb-4 font-weight-bold text-white text-shadow">
             Feeling bored?
         </h1>
-        @using (@Html.BeginForm("SearchRedirect", "Home"))
+        @using (@Html.BeginForm("Search", "Events", FormMethod.Get))
         {
-            @Html.AntiForgeryToken()
             @Html.ValidationSummary("", new { @class = "text-danger" })
             <div class="bg-white p-3 rounded">
                 <div class="form-row">
@@ -24,14 +23,8 @@
                     <div class="col-xl-2 form-group mb-xl-0 ec-showcase-form-group">
                         @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control border-0 mb-xl-0 rounded-0 ec-showcase-form-control", @placeholder = "When?" } })
                     </div>
-                    <div class="col-xl-2 form-group mb-xl-0 ec-showcase-form-group">
-                        <select class="form-control border-0 rounded-0 ec-showcase-form-control">
-                            <option selected>Category</option>
-                            <option value="fun">Education</option>
-                            <option value="fun">Party</option>
-                            <option value="fun">Fashion & Shopping</option>
-                            <option value="fun">IT World</option>
-                        </select>
+                    <div class="col-xl-2 form-group mb-xl-0 ec-showcase-form-group">    
+                        @Html.ListBoxFor(model => model.SelectedCategoryIds, new SelectList(Model.Categories, "Id", "Name"), new { @class = "form-control" })
                     </div>
                     <div class="col-xl-2 form-group mb-0 ec-showcase-form-group">
                         <button class="btn btn-block btn-primary" type="submit">Search</button>
@@ -53,14 +46,14 @@
             }
         )
         <div class="row">
-            @foreach (var category in Model.Categories)
+            @foreach (Category category in Model.Categories.Take(4))
             {
                 <div class="col-md-6 col-lg-3 mb-3 mb-lg-0">
                     @Html.Partial(
                         "~/Views/Shared/Partials/Category.cshtml",
                         new ViewDataDictionary
                         {
-                            { "Url", "URL" },
+                            { "Url", Url.Action("Search", "Events", new { SelectedCategoryIds = category.Id }) },
                             { "ImageUrl", category.Image },
                             { "Title", category.Name },
                             { "Description", category.Description }
@@ -79,7 +72,7 @@
             {
                 { "Title", "Random events" },
                 { "ActionTitle", "See more" },
-                { "ActionUrl", "Events" }
+                { "ActionUrl", Url.Action("Search", "Events") }
             }
         )
         <div class="row">
@@ -97,7 +90,7 @@
                         new ViewDataDictionary
                         {
                             { "Id", @event.Id },
-                            { "ImageUrl", imageLink },
+                            { "ImageUrl", @event.Images != null ? Imgur.Instance.GetAlbumImages(@event.Images)[0].Link : null },
                             { "Title", @event.Name },
                             { "Categories", @event.Categories },
                             { "Date", @event.Datetime },

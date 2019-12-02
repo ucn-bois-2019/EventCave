@@ -5,12 +5,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Design;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EventCaveWeb.Utils;
+using System.Data.Entity;
 
 namespace EventCaveWeb.Controllers
 {
@@ -20,11 +20,27 @@ namespace EventCaveWeb.Controllers
         [Route("Search")]
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Search(string keyword, string location, DateTime date, Category category)
+        public ActionResult Search([Bind(Include = "Keyword,Location,DateTime,SelectedCategoryIds")] HomeViewModel model)
         {
+            // TODO: MySQL does not support DBFunctions to truncate time and EF6 does not support Datetime type.
+            // Figure out or we are done. 
+            // https://stackoverflow.com/questions/7016765/currentutcdatetime-does-not-exist-entity-framework-and-mysql
+
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-            var events = db.Events.Where(e => e.Name.Equals(keyword)).Where(e => e.Location.Equals(location));
-            return View(events.ToList());
+            var events = db.Events.Include("Categories").AsQueryable();
+            if (model.Location != null)
+            {
+                events = events.Where(e => e.Location.Equals(model.Location));
+            }
+            if (model.Keyword != null)
+            {
+                events = events.Where(e => e.Name.Equals("ddd"));
+            }
+            if (model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any())
+            {
+                events = events.Where(e => e.Categories.Any(c => model.SelectedCategoryIds.Contains(c.Id)));
+            }
+            return View(events.ToList());   
         }
 
         [Route("Create")]
@@ -86,6 +102,7 @@ namespace EventCaveWeb.Controllers
                 }
                 CreateUpdateEventViewModel CreateUpdateEventViewModel = new CreateUpdateEventViewModel()
                 {
+                    Id = @event.Id,
                     Name = @event.Name,
                     Description = @event.Description,
                     Location = @event.Location,
@@ -126,7 +143,7 @@ namespace EventCaveWeb.Controllers
                     Message.Create(Response, "Event was successfully edited.");
                 }
             }
-            return RedirectToAction("Edit", "Events", new { id });
+            return RedirectToAction("Detail", "Events", new { id });
         }
 
 
