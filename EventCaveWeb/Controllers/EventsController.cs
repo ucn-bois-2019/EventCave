@@ -164,7 +164,6 @@ namespace EventCaveWeb.Controllers
                 }
                 EventDetailViewModel.Going = going;
                 EventDetailViewModel.AuthenticatedUser = user;
-
                 return View(EventDetailViewModel);
             }
         }
@@ -191,7 +190,7 @@ namespace EventCaveWeb.Controllers
                 user.EventsEnrolledIn.Add(userEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });
+            return RedirectToAction("Detail", "Events", new { id = anEvent.Id });
         }
 
         [Route("UnattendEvent")]
@@ -204,18 +203,12 @@ namespace EventCaveWeb.Controllers
             {
                 anEvent = db.Events.Find(eventId);
                 ApplicationUser user = db.Users.Find(userId);
-                UserEvent userEvent = new UserEvent()
-                {
-                    Event = anEvent,
-                    EventId = anEvent.Id,
-                    User = user,
-                    ApplicationUserId = user.Id
-                };
+                UserEvent userEvent = db.UserEvents.Where(ue => ue.EventId == anEvent.Id && ue.ApplicationUserId == user.Id).First();
                 anEvent.Attendees.Remove(userEvent);
                 user.EventsEnrolledIn.Remove(userEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Detail", "Events", new { EventId = anEvent.Id });
+            return RedirectToAction("Detail", "Events", new { id = anEvent.Id });
         }
     }
 }
