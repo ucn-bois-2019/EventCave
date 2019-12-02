@@ -84,6 +84,7 @@ namespace EventCaveWeb.Controllers
                 user.Bio = editUserProfileViewModel.Bio;
                 _userManager.Update(user);
             }
+            Message.Create(Response, "Profile was successfully edited.");
             return RedirectToAction("Profile", "Users", new { username = user.UserName });
         }
 
@@ -114,6 +115,7 @@ namespace EventCaveWeb.Controllers
                     changeUserPasswordViewModel.NewPassword
                 );
             }
+            Message.Create(Response, "Password was successfully changed.");
             return RedirectToAction("Profile", "Users", new { username = user.UserName });
         }
     }

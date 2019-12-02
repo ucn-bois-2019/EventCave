@@ -48,8 +48,7 @@ namespace EventCaveWeb.Controllers
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Search(string keyword, string location, DateTime date, Category category)
-        {   
-            
+        {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             var events = db.Events.Where(e => e.Name.Equals(keyword)).Where(e => e.Location.Equals(location));
             return View(events.ToList());
@@ -77,13 +76,10 @@ namespace EventCaveWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateUpdateEventViewModel model)
         {
-            
             if (ModelState.IsValid)
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
-
-                {
-                    
+                {       
                     var Event = new Event
                     {
                         Name = model.Name,
@@ -98,10 +94,10 @@ namespace EventCaveWeb.Controllers
                     };
                     db.Events.Add(Event);
                     db.SaveChanges();
+                    Message.Create(Response, "Event was successfully created.");
                     return RedirectToAction("Detail", "Events", new { EventId = Event.Id });
                 }
             }
-
             return View();
         }
 
@@ -152,8 +148,8 @@ namespace EventCaveWeb.Controllers
                     Event.Limit = CreateUpdateEventViewModel.Limit;
                     Event.Images = CreateUpdateEventViewModel.Images;
                     db.SaveChanges();
+                    Message.Create(Response, "Event was successfully edited.");
                 }
-
             }
             return RedirectToAction("Edit", "Events", new { EventId = EventId });
         }

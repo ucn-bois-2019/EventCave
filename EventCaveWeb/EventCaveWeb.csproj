@@ -307,6 +307,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\BrowserJsonFormatter.cs" />
     <Compile Include="Utils\Imgur.cs" />
+    <Compile Include="Utils\Message.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModels.cs" />
     <Compile Include="ViewModels\UserProfileViewModels.cs" />
@@ -360,6 +361,7 @@
     <Content Include="Views\Events\Edit.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\ChangePassword.cshtml" />
+    <Content Include="Views\Shared\Partials\Messages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201911301609431_Initial.resx">

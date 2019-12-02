@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EventCaveWeb.Models;
 using EventCaveWeb.ViewModels;
+using EventCaveWeb.Utils;
 
 namespace EventCaveWeb.Controllers
 {
@@ -72,6 +73,7 @@ namespace EventCaveWeb.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Message.Create(Response, "Welcome back! We are glad to see you again.");
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.Failure:
                 default:
@@ -108,6 +110,7 @@ namespace EventCaveWeb.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    Message.Create(Response, "Thank you for using our platform.");
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

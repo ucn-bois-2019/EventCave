@@ -1,0 +1,22 @@
+﻿@using EventCaveWeb.Utils
+
+@{
+    if (Message.Exists(Request))
+    {
+        <div class="ec-toast-wrapper">
+            <div class="toast ec-toast">
+                <div class="toast-header">
+                    <span class="mr-auto">New message</span>
+                    <small>just now</small>
+                    <button type="button" class="ml-2 mb-1 close float-right" data-dismiss="toast">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="toast-body">
+                    @Message.Get(Request)
+                </div>
+            </div>
+        </div>
+        Message.Clear(Response);
+    }
+}
