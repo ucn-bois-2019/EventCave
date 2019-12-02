@@ -31,13 +31,11 @@ namespace EventCaveWeb.ViewModels
         public string Location { get; set; }
         public DateTime Datetime { get; set; }
         public int Limit { get; set; }
+        public bool Going { get; set; }
         public ApplicationUser Host { get; set; }
         public int AttendeeCount { get; set; }
         public int SpacesLeft { get; set; }
         public ICollection<Category> Categories { get; set; }
         public IEnumerable<ImgurImage> Images { get; set; }
-        public bool Going { get; set; }
-        public ApplicationUser AuthenticatedUser { get; set; }
-        
     }
 }

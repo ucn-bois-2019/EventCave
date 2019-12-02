@@ -67,12 +67,12 @@
             @if (@Model.Going)
             {
                 <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                   href="@Url.Action("UnattendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Unattend event</a>
+                   href="@Url.Action("Unattend", "Events", new { id = @Model.Id })">Unattend event</a>
             }
             else
             {
                 <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                   href="@Url.Action("AttendEvent", "Events", new { eventId = @Model.Id, userId = @Model.AuthenticatedUser.Id})">Attend event</a>
+                   href="@Url.Action("Attend", "Events", new { id = @Model.Id })">Attend event</a>
             }
         </div>
         <hr />

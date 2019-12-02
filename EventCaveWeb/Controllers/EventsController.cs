@@ -153,62 +153,60 @@ namespace EventCaveWeb.Controllers
                     Images = Imgur.Instance.GetAlbumImages(@event.Images)
                 };
                 bool going = false;
-                ApplicationUser user = new ApplicationUser();
                 if (User.Identity.IsAuthenticated)
                 {
-                    user = db.Users.Find(User.Identity.GetUserId());
+                    ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
                     if (user.EventsEnrolledIn.Where(e => e.EventId == @event.Id).Any())
                     {
                         going = true;
                     }
                 }
                 EventDetailViewModel.Going = going;
-                EventDetailViewModel.AuthenticatedUser = user;
                 return View(EventDetailViewModel);
             }
         }
 
-        [Route("AttendEvent")]
+        [Route("{id}/Attend")]
         [HttpGet]
         [Authorize]
-        public ActionResult AttendEvent(int eventId, string userId)
+        public ActionResult Attend(int id)
         {
-            Event anEvent = null;
+            Event @event = null;
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                anEvent = db.Events.Find(eventId);
-                ApplicationUser user = db.Users.Find(userId);
+                @event = db.Events.Find(id);
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
                 UserEvent userEvent = new UserEvent()
                 {
-                    Event = anEvent,
-                    EventId = anEvent.Id,
+                    Event = @event,
+                    EventId = @event.Id,
                     User = user,
                     ApplicationUserId = user.Id
                 };
 
-                anEvent.Attendees.Add(userEvent);
+                @event.Attendees.Add(userEvent);
                 user.EventsEnrolledIn.Add(userEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Detail", "Events", new { id = anEvent.Id });
+            return RedirectToAction("Detail", "Events", new { id = @event.Id });
         }
 
-        [Route("UnattendEvent")]
+        [Route("{id}/unattend")]
         [HttpGet]
         [Authorize]
-        public ActionResult UnattendEvent(int eventId, string userId)
+        public ActionResult Unattend(int id)
         {
-            Event anEvent = null;
+            Event @event = null;
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
-                anEvent = db.Events.Find(eventId);
-                ApplicationUser user = db.Users.Find(userId);
-                UserEvent userEvent = db.UserEvents.Where(ue => ue.EventId == anEvent.Id && ue.ApplicationUserId == user.Id).First();
-                anEvent.Attendees.Remove(userEvent);
+                @event = db.Events.Find(id);
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                UserEvent userEvent = db.UserEvents.Where(ue => ue.EventId == @event.Id && ue.ApplicationUserId == user.Id).First();
+                @event.Attendees.Remove(userEvent);
                 user.EventsEnrolledIn.Remove(userEvent);
                 db.SaveChanges();
             }
-            return RedirectToAction("Detail", "Events", new { id = anEvent.Id });
+            return RedirectToAction("Detail", "Events", new { id = @event.Id });
         }
     }
 }
