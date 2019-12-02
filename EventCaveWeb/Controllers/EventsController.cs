@@ -88,7 +88,7 @@ namespace EventCaveWeb.Controllers
                         Location = model.Location,
                         Datetime = model.Datetime,
                         Limit = model.Limit,
-                        Categories = new List<Category> { db.Categories.Find(int.Parse(model.SelectedCategoryId)) },
+                        Categories = db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList(),
                         CreatedAt = DateTime.Now,
                         Host = UserManager.FindById(User.Identity.GetUserId()),
                         Images = model.Images
@@ -121,6 +121,8 @@ namespace EventCaveWeb.Controllers
                     Location = Event.Location,
                     Datetime = Event.Datetime,
                     Limit = Event.Limit,
+                    Categories = db.Categories.ToList(),
+                    SelectedCategoryIds = Event.Categories.ToList().Select(c => c.Id),
                     Images = Event.Images
                 };
                 return View(CreateUpdateEventViewModel);
@@ -136,8 +138,7 @@ namespace EventCaveWeb.Controllers
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
                 {
-
-                    Event Event = db.Events.Find(EventId);
+                    Event Event = db.Events.Include("Categories").First(e => e.Id == EventId);
                     if (Event == null)
                     {
                         return HttpNotFound();
@@ -145,6 +146,7 @@ namespace EventCaveWeb.Controllers
                     Event.Name = CreateUpdateEventViewModel.Name;
                     Event.Description = CreateUpdateEventViewModel.Description;
                     Event.Location = CreateUpdateEventViewModel.Location;
+                    Event.Categories = db.Categories.Where(c => CreateUpdateEventViewModel.SelectedCategoryIds.Contains(c.Id)).ToList(); 
                     Event.Datetime = CreateUpdateEventViewModel.Datetime;
                     Event.Limit = CreateUpdateEventViewModel.Limit;
                     Event.Images = CreateUpdateEventViewModel.Images;

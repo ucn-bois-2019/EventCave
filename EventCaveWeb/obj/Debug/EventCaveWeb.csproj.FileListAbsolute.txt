@@ -1330,12 +1330,10 @@ C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.Owin
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csprojAssemblyReference.cache
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.Initial.resources
-C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedEventRelationsToUser_AddedAttendeesToEvent_AddedCategories.resources
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.GenerateResource.cache
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.csproj.CopyComplete
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.dll
 C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.pdb
-C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedImagesToEventAndUser.resources
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.dll
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\RestSharp.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\RestSharp.dll
@@ -1523,3 +1521,9 @@ C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\Microsoft.Owin.Securit
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\System.Net.Http.Formatting.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\System.Web.Http.xml
 C:\Users\michal\schoolProjects\EventCave\EventCaveWeb\bin\System.Web.Http.WebHost.xml
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Net.Http.Formatting.dll
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.dll
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.WebHost.dll
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Net.Http.Formatting.xml
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.xml
+C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.WebHost.xml
