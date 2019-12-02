@@ -35,7 +35,7 @@ namespace EventCaveWeb.Utils
             if (id == null)
             {
                 return new ImgurImage() { Link = "https://via.placeholder.com/512" };
-                }
+            }
             var request = new RestRequest($"image/{id}", Method.GET);
             request.AddHeader("Authorization", AUTHORIZATION_HEADER);
             IRestResponse response = client.Execute(request);
