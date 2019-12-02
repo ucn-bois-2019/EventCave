@@ -16,12 +16,13 @@
                     <h1 class="mb-0 font-weight-bold">
                         @Html.DisplayFor(model => model.UserName)
                     </h1>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.Name.Equals(Model.UserName))
                     {
                         <a href="@Url.Action("Edit", "Users", new { username = User.Identity.Name })" class="text-muted">
                             <small>Edit profile</small>
                         </a>
                     }
+
                 </div>
                 <ul class="list-unstyled text-muted">
                     <li class="mb-2">
