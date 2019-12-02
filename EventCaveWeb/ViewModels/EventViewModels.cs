@@ -21,7 +21,7 @@ namespace EventCaveWeb.ViewModels
         public int Limit { get; set; }
 
         public List<Category> Categories { get; set; }
-        public Category Category { get; set; }
+        public string SelectedCategoryId { get; set; }
 
         public ICollection<Event> Events { get; set;  }
     }

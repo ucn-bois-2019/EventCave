@@ -103,7 +103,7 @@
             <div class="col-12 col-lg-7 ml-auto">
                 <div class="form-group">
                     <label>Choose category</label>
-                    @Html.DropDownListFor(m => Model.Categories.Find(x => x.Id == m), new SelectList(Model.Categories.Select(x => x.Id), "Id", "Name"), "Select category", new { @class = "form-control" })
+                    @Html.DropDownListFor(m => Model.SelectedCategoryId, new SelectList(Model.Categories, "Id", "Name"), "Select category", new { @class = "form-control" })
                 </div>
             </div>
         </div>

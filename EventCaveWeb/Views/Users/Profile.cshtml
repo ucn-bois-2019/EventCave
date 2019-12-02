@@ -31,7 +31,14 @@
                     </li>
                     <li class="mb-2">
                         <i data-feather="calendar" class="text-danger mr-2"></i>
-                        <span>Hosted 52 events</span>
+                        @if (Model.HostedEvents.Count == 1)
+                        {
+                            <span>Hosted 1 event</span>
+                        }
+                        else
+                        {
+                            <span>Hosted @Model.HostedEvents.Count events</span>
+                        }
                     </li>
                 </ul>
             </div>

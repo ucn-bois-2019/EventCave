@@ -76,10 +76,11 @@ namespace EventCaveWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CreateUpdateEventViewModel model)
         {
+
             if (ModelState.IsValid)
             {
                 using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
-                {       
+                {
                     var Event = new Event
                     {
                         Name = model.Name,
@@ -87,7 +88,7 @@ namespace EventCaveWeb.Controllers
                         Location = model.Location,
                         Datetime = model.Datetime,
                         Limit = model.Limit,
-                        Categories = new List<Category>() {model.Category},
+                        Categories = new List<Category> { db.Categories.Find(int.Parse(model.SelectedCategoryId)) },
                         CreatedAt = DateTime.Now,
                         Host = UserManager.FindById(User.Identity.GetUserId()),
                         Images = model.Images
