@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = $"{Model.Name} | Event Cave";
 }
-
 <section>
     <div data-slider>
         @foreach (var Image in Model.Images)
@@ -17,15 +16,13 @@
     <div class="container py-5">
         <!-- Title -->
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center mb-4">
-
             <h1 class="font-weight-bold">@Model.Name</h1>
-            @if (User.Identity.Name.Equals(Model.Host.UserName))
+            @if (User.Identity.IsAuthenticated)
             {
-                <a href="@Url.Action("Edit", "Events", new { username = User.Identity.Name })" class="text-muted">
+                <a href="@Url.Action("Edit", "Events", new { id = Model.Id })" class="text-muted">
                     <small>Edit event</small>
                 </a>
             }
-            
         </div>
         <!-- Categories -->
         <div class="mb-3">
