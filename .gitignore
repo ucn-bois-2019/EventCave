@@ -259,3 +259,5 @@ EventCaveWeb/bin/
 EventCaveWeb/obj/
 Core/bin
 Core/obj/
+Core.Test/bin
+Core.Test/obj/
