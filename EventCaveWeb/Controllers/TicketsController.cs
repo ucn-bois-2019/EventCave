@@ -56,7 +56,8 @@ namespace EventCaveWeb.Controllers
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             TicketListingViewModel model = new TicketListingViewModel()
             {
-                Tickets = db.Tickets.ToList()
+                ResolvedTickets = db.Tickets.Where(t => t.Resolved == true).ToList(),
+                PendingTickets = db.Tickets.Where(t => t.Resolved == false).ToList()
             };
             return View(model);
         }

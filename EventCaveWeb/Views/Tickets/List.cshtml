@@ -1,1 +1,28 @@
-﻿<h1>This is list of all tickets</h1>
+﻿@using EventCaveWeb.Models
+@model EventCaveWeb.ViewModels.TicketListingViewModel
+@{
+    ViewBag.Title = "Your tickets | Event Cave";
+}
+<section class="py-5">
+    <div class="container">
+        <h1>Pending Tickets</h1>
+        @foreach (Ticket ticket in Model.PendingTickets)
+        {
+            <div>
+                <div>Subject: @ticket.Subject</div>
+                <div>Message: @ticket.Message</div>
+                <div>Submitted at: @ticket.SubmittedAt</div>
+            </div>
+        }
+        <h1>Resolved Tickets</h1>
+        @foreach (Ticket ticket in Model.ResolvedTickets)
+        {
+            <div>
+                <div>Subject: @ticket.Subject</div>
+                <div>Message: @ticket.Message</div>
+                <div>Submitted at: @ticket.SubmittedAt</div>
+                <div>Response: @ticket.Response</div>
+            </div>
+        }
+    </div>
+</section>

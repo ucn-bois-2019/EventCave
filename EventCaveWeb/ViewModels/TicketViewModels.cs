@@ -29,6 +29,7 @@ namespace EventCaveWeb.ViewModels
 
     public class TicketListingViewModel
     {
-        public IEnumerable<Ticket> Tickets { get; set; }
+        public IEnumerable<Ticket> ResolvedTickets { get; set; }
+        public IEnumerable<Ticket> PendingTickets { get; set; }
     }
 }
