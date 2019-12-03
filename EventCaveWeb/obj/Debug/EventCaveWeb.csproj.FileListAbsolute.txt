@@ -1527,3 +1527,4 @@ C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.WebHost.dll
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Net.Http.Formatting.xml
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.xml
 C:\Users\maro\Projects\EventCave\EventCaveWeb\bin\System.Web.Http.WebHost.xml
+C:\Users\maro\Projects\EventCave\EventCaveWeb\obj\Debug\EventCaveWeb.Migrations.AddedTickets.resources

@@ -23,6 +23,7 @@ namespace EventCaveWeb.Models
 
         public virtual ICollection<UserEvent> EventsEnrolledIn { get; set; }
         public virtual ICollection<Event> EventsHosted { get; set; }
+        public virtual ICollection<Ticket> Tickets { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
