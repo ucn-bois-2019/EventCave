@@ -51,6 +51,7 @@ namespace EventCaveWeb.Controllers
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             return View(new CreateUpdateEventViewModel
             {
+                Datetime = DateTime.Now,
                 Categories = db.Categories.ToList()
             });
         }

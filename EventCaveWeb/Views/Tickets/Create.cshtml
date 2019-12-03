@@ -11,7 +11,9 @@
             @Html.Partial(
                 "~/Views/Shared/Partials/Title.cshtml",
                 new ViewDataDictionary {
-                    { "Title", "Submit a ticket"}
+                    { "Title", "Submit a ticket"},
+                    { "ActionTitle", "Back to tickets listing" },
+                    { "ActionUrl", Url.Action("List", "Tickets") }
                 }
             )
             <hr class="my-4 my-lg-5" />

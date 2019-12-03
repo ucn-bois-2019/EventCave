@@ -21,6 +21,7 @@ namespace EventCaveWeb.ViewModels
         public DateTime Datetime { get; set; }
         public int Limit { get; set; }
         public IEnumerable<Category> Categories { get; set; }
+        [Display(Name = "Categories")]
         public IEnumerable<int> SelectedCategoryIds { get; set; }
     }
 

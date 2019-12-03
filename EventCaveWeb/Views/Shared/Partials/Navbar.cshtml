@@ -27,6 +27,9 @@
                         <a class="nav-link font-weight-bold" href="@Url.Action("Profile", "Users", new { UserName = User.Identity.Name })">My profile</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="@Url.Action("List", "Tickets")">Tickets</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link font-weight-bold" href="@Url.Action("SignOut", "Auth")">Sign out</a>
                     </li>
                 }

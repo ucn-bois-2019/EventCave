@@ -23,7 +23,7 @@ namespace EventCaveWeb.Controllers
             ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == username);
             DetailUserProfileViewModel detailUserProfileViewModel = new DetailUserProfileViewModel()
             {
-                UserName = user.UserName,
+                Username = user.UserName,
                 Picture = Imgur.Instance.GetImage(user.Picture),
                 Bio = user.Bio,
                 RegisteredAt = user.RegisteredAt,

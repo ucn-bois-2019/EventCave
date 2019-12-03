@@ -34,46 +34,33 @@
         <div>
             <ul class="list-unstyled text-muted">
                 <li class="mb-2">
+                    <i data-feather="map" class="text-danger mr-2"></i>
+                    <span>@Model.Location</span>
+                </li>
+                <li class="mb-2">
                     <i data-feather="calendar" class="text-danger mr-2"></i>
                     <span>@Model.Datetime</span>
                 </li>
-                @if (@Model.AttendeeCount == 1)
-                {
-                    <li class="mb-2">
-                        <i data-feather="users" class="text-danger mr-2"></i>
-                        <span>@Model.AttendeeCount person attending</span>
-                    </li>
-                }
-                else
-                {
-                    <li class="mb-2">
-                        <i data-feather="users" class="text-danger mr-2"></i>
-                        <span>@Model.AttendeeCount people attending</span>
-                    </li>
-                }
+                <li class="mb-2">
+                    <i data-feather="users" class="text-danger mr-2"></i>
+                    <span>@Model.AttendeeCount @(Model.AttendeeCount == 1 ? "person" : "people") attending</span>
+                </li>
                 @if (@Model.Limit > 0)
                 {
                     <li class="mb-2">
                         <i data-feather="target" class="text-danger mr-2"></i>
-                        <span>@Model.SpacesLeft places left</span>
+                        <span>@(Model.Limit == 0 ? "Unlimited spaces" : $"{Model.SpacesLeft} places left")</span>
                     </li>
                 }
-
             </ul>
         </div>
         <!-- Actions -->
-        <div class="btn-group">
-            @if (@Model.Going)
-            {
-                <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                   href="@Url.Action("Unattend", "Events", new { id = @Model.Id })">Unattend event</a>
-            }
-            else
-            {
-                <a class="btn btn-primary d-none d-md-inline-block font-weight-bold"
-                   href="@Url.Action("Attend", "Events", new { id = @Model.Id })">Attend event</a>
-            }
-        </div>
+        @if (!User.Identity.Name.Equals(Model.Host.UserName))
+        {
+            <a class="btn btn-primary" href="@Url.Action(Model.Going ? "Unattend" : "Attend", "Events", new { id = @Model.Id })">
+                @(Model.Going ? "Unattend" : "Attend") event
+            </a>
+        }
         <hr />
         <!-- Description -->
         @Html.Partial(
@@ -104,10 +91,8 @@
                      class="rounded-circle mr-4" />
                 <div class="media-body">
                     <span class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</span>
-                    <p class="mb-0 text-muted">
-                        <small>
-                            @Model.Host.Bio
-                        </small>
+                    <p class="mb-0 text-muted">    
+                        @Model.Host.Bio
                     </p>
                 </div>
             </div>

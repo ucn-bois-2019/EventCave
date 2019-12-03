@@ -6,7 +6,7 @@ namespace EventCaveWeb.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [Required]

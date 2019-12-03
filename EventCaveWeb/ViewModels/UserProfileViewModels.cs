@@ -10,7 +10,7 @@ namespace EventCaveWeb.ViewModels
 {
     public class DetailUserProfileViewModel
     {
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public ImgurImage Picture;
         public string Bio { get; set; }
         public DateTime RegisteredAt { get; set; }

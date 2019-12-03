@@ -1,28 +1,87 @@
 ﻿@using EventCaveWeb.Models
+@using System.Linq
 @model EventCaveWeb.ViewModels.TicketListingViewModel
 @{
     ViewBag.Title = "Your tickets | Event Cave";
 }
 <section class="py-5">
     <div class="container">
-        <h1>Pending Tickets</h1>
-        @foreach (Ticket ticket in Model.PendingTickets)
-        {
-            <div>
-                <div>Subject: @ticket.Subject</div>
-                <div>Message: @ticket.Message</div>
-                <div>Submitted at: @ticket.SubmittedAt</div>
-            </div>
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary {
+                { "Title", "Resolved tickets"},
+                { "ActionTitle", "Submit new ticket" },
+                { "ActionUrl", Url.Action("Create", "Tickets") }
+            }
+        )
+        @{
+            if (Model.ResolvedTickets != null && Model.ResolvedTickets.Count() > 0)
+            {
+                <div class="list-group">
+                    @foreach (Ticket ticket in Model.ResolvedTickets)
+                    {
+                        <a href="#ticket-@ticket.Id" class="list-group-item list-group-item-action" data-toggle="collapse">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted font-weight-bold">Subject:</small>
+                                    <div>@ticket.Subject</div>
+                                </div>
+                                <small class="text-muted">@ticket.SubmittedAt</small>
+                            </div>
+                            <div class="collapse" id="ticket-@ticket.Id">
+                                <div class="mt-2">
+                                    <small class="text-muted font-weight-bold">Message:</small>
+                                    <div>@ticket.Message</div>
+                                </div>
+                                <div class="mt-2">
+                                    <small class="text-muted font-weight-bold">Response:</small>
+                                    <div>@ticket.Response</div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                @Html.Partial("~/Views/Shared/Partials/Empty.cshtml")
+            }
         }
-        <h1>Resolved Tickets</h1>
-        @foreach (Ticket ticket in Model.ResolvedTickets)
-        {
-            <div>
-                <div>Subject: @ticket.Subject</div>
-                <div>Message: @ticket.Message</div>
-                <div>Submitted at: @ticket.SubmittedAt</div>
-                <div>Response: @ticket.Response</div>
-            </div>
+        <hr />
+        @Html.Partial(
+            "~/Views/Shared/Partials/Title.cshtml",
+            new ViewDataDictionary {
+                { "Title", "Pending tickets"}
+            }
+        )
+        @{
+            if (Model.PendingTickets != null && Model.PendingTickets.Count() > 0)
+            {
+                <div class="list-group">
+                    @foreach (Ticket ticket in Model.PendingTickets)
+                    {
+                        <a href="#ticket-@ticket.Id" class="list-group-item list-group-item-action" data-toggle="collapse">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <small class="text-muted font-weight-bold">Subject:</small>
+                                    <div>@ticket.Subject</div>
+                                </div>
+                                <small class="text-muted">@ticket.SubmittedAt</small>
+                            </div>
+                            <div class="collapse" id="ticket-@ticket.Id">
+                                <div class="mt-2">
+                                    <small class="text-muted font-weight-bold">Message:</small>
+                                    <div>@ticket.Message</div>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                @Html.Partial("~/Views/Shared/Partials/Empty.cshtml")
+            }
         }
     </div>
 </section>

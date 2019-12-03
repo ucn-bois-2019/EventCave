@@ -54,28 +54,11 @@ namespace EventCaveWeb.Controllers
         public ActionResult List()
         {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+            string userId = User.Identity.GetUserId();
             TicketListingViewModel model = new TicketListingViewModel()
             {
-                ResolvedTickets = db.Tickets.Where(t => t.Resolved == true).ToList(),
-                PendingTickets = db.Tickets.Where(t => t.Resolved == false).ToList()
-            };
-            return View(model);
-        }
-
-        [Route("Tickets/{id}")]
-        [HttpGet]
-        [Authorize]
-        public ActionResult Detail(int id)
-        {
-            DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-            Ticket ticket = db.Tickets.Find(id);
-            DetailTicketViewModel model = new DetailTicketViewModel()
-            {
-                Subject = ticket.Subject,
-                Message = ticket.Message,
-                Response = ticket.Response,
-                Resolved = ticket.Resolved,
-                SubmittedAt = ticket.SubmittedAt
+                ResolvedTickets = db.Tickets.Where(t => t.Sender.Id == userId && t.Resolved == true).ToList(),
+                PendingTickets = db.Tickets.Where(t => t.Sender.Id == userId && t.Resolved == false).ToList()
             };
             return View(model);
         }

@@ -263,4 +263,4 @@ Core.Test/bin
 Core.Test/obj/
 
 # .csproj.user
-EventCaveWeb.csproj.user
+EventCaveWeb/EventCaveWeb.csproj.user
