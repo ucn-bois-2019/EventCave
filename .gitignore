@@ -253,3 +253,9 @@ _Pvt_Extensions
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# manual '/obj', '/bin' removal
+EventCaveWeb/bin/
+EventCaveWeb/obj/
+Core/bin
+Core/obj/
