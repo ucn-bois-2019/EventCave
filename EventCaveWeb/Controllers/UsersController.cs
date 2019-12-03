@@ -4,7 +4,6 @@ using EventCaveWeb.Utils;
 using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Linq;

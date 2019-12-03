@@ -34,7 +34,7 @@ namespace EventCaveWeb.Controllers
             }
             if (model.Keyword != null)
             {
-                events = events.Where(e => e.Name.Equals("ddd"));
+                events = events.Where(e => e.Name.Equals(model.Keyword));
             }
             if (model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any())
             {
@@ -145,7 +145,6 @@ namespace EventCaveWeb.Controllers
             }
             return RedirectToAction("Detail", "Events", new { id });
         }
-
 
         [Route("{id}")]
         [HttpGet]
