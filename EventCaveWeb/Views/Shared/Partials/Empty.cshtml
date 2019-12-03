@@ -1,4 +1,4 @@
 ﻿<div class="d-flex flex-column justify-content-center align-items-center text-muted ec-empty">
-    <i data-feather="box"></i>
-    <h5 class="font-weight-bold">So empty</h5>
+    <i data-feather="@(ViewBag.EmptyIcon ?? "box")"></i>
+    <h5 class="font-weight-bold">@(ViewBag.EmptyTitle ?? "So empty")</h5>
 </div>
