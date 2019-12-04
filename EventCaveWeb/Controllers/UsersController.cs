@@ -17,7 +17,7 @@ namespace EventCaveWeb.Controllers
         [Route("{username}")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> Profile(string username)
+        public ActionResult UserProfile(string username)
         {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == username);
@@ -36,7 +36,7 @@ namespace EventCaveWeb.Controllers
         [Route("{username}/Edit")]
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> Edit(string username)
+        public ActionResult Edit(string username)
         {
             if (username != User.Identity.Name)
             {
@@ -59,7 +59,7 @@ namespace EventCaveWeb.Controllers
         [Route("{username}/Edit")]
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult> Edit([Bind(Include = "Username, FirstName, LastName, Email, Picture, Bio")] EditUserProfileViewModel model)
+        public ActionResult Edit([Bind(Include = "Username, FirstName, LastName, Email, Picture, Bio")] EditUserProfileViewModel model)
         {
             if (model.Username != User.Identity.Name)
             {

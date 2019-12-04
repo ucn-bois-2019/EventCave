@@ -24,7 +24,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        <a class="nav-link font-weight-bold" href="@Url.Action("Profile", "Users", new { UserName = User.Identity.Name })">My profile</a>
+                        <a class="nav-link font-weight-bold" href="@Url.Action("UserProfile", "Users", new { UserName = User.Identity.Name })">My profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold" href="@Url.Action("List", "Tickets")">Tickets</a>

@@ -364,7 +364,7 @@
     <Content Include="Views\Shared\Head.cshtml" />
     <Content Include="Views\Shared\Scripts.cshtml" />
     <Content Include="Views\Shared\AlternativeLayout.cshtml" />
-    <Content Include="Views\Users\Profile.cshtml" />
+    <Content Include="Views\Users\UserProfile.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\Events\Detail.cshtml" />
     <Content Include="Views\Events\Edit.cshtml" />
