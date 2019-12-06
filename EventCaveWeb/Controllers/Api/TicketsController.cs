@@ -4,14 +4,15 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace EventCaveWeb.Controllers.Api
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TicketsController : ApiController
     {
         [Route("Api/Tickets")]
         [HttpGet]
-        [Authorize]
         public IQueryable<TicketDto> List()
         {
             DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>();
@@ -32,7 +33,6 @@ namespace EventCaveWeb.Controllers.Api
 
         [Route("Api/Tickets/{id}")]
         [HttpGet]
-        [Authorize]
         public TicketDto Single(int id)
         {
             DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>();
@@ -53,7 +53,6 @@ namespace EventCaveWeb.Controllers.Api
 
         [Route("Api/Tickets/{id}/Resolve")]
         [HttpPost]
-        [Authorize]
         public IHttpActionResult ResolveTicket(int id, [FromBody] TicketResolveDto dto)
         {
             DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>();
@@ -66,7 +65,7 @@ namespace EventCaveWeb.Controllers.Api
             ticket.Resolved = true;
             db.SaveChanges();
             return Ok(
-                new 
+                new
                 {
                     Status = 200,
                     Message = "Ticket was marked as resolved."

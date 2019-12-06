@@ -41,17 +41,17 @@ namespace EventCaveWeb.Migrations
                 new Event() { Name = "Casino night", Description = "Explore the nightlife in the city's best clubs and casinos.", Location = "Aalborg, Denmark", Datetime = DateTime.Parse("8.2.2012"), CreatedAt = DateTime.Now, Host = TestUser },
                 new Event() { Name = "Sunset bbq", Description = "Enjoy a cold beer with a freshly-grilled sausage at the beach.", Location = "Skagen, Denmark", Datetime = DateTime.Parse("9.10.2019"), CreatedAt = DateTime.Now, Host = TestUser }
                 );
-            
+
             // to add categories to events automatically, run Update-Database once, then uncomment the following lines and run Update-Database again
 
-            //context.Events.Where(e => e.Name.Equals("City exploration")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("City tour")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Drinks")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Gambling")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Education")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Job seminar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Education")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Job seminar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Employment")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Casino night")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Gambling")).FirstOrDefault());
-            //context.Events.Where(e => e.Name.Equals("Sunset bbq")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Drinks")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("City exploration")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("City tour")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Drinks")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Gambling")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Friday bar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Education")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Job seminar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Education")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Job seminar")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Employment")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Casino night")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Gambling")).FirstOrDefault());
+            context.Events.Where(e => e.Name.Equals("Sunset bbq")).FirstOrDefault().Categories.Add(context.Categories.Where(c => c.Name.Equals("Drinks")).FirstOrDefault());
         }
     }
 }
