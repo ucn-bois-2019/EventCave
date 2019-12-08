@@ -35,6 +35,7 @@ namespace EventCaveWeb.ViewModels
         public int Limit { get; set; }
         public bool Going { get; set; }
         public ApplicationUser Host { get; set; }
+        public ImgurImage HostPicture { get; set; }
         public int AttendeeCount { get; set; }
         public int SpacesLeft { get; set; }
         public ICollection<Category> Categories { get; set; }

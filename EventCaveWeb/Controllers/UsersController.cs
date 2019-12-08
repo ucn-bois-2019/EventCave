@@ -77,7 +77,7 @@ namespace EventCaveWeb.Controllers
                 db.SaveChanges();
             }
             Message.Create(Response, "Profile was successfully edited.");
-            return RedirectToAction("Profile", "Users", new { username = user.UserName });
+            return RedirectToAction("UserProfile", "Users", new { username = user.UserName });
         }
 
         [Route("{username}/Edit/ChangePassword")]
@@ -95,7 +95,7 @@ namespace EventCaveWeb.Controllers
         {
             if (model.Username != User.Identity.Name)
             {
-                return RedirectToAction("Profile", "Users", new { username = model.Username });
+                return RedirectToAction("UserProfile", "Users", new { username = model.Username });
             }
             var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             ApplicationUser user = await userManager.FindByIdAsync(User.Identity.GetUserId());
@@ -108,7 +108,7 @@ namespace EventCaveWeb.Controllers
                 );
             }
             Message.Create(Response, "Password was successfully changed.");
-            return RedirectToAction("Profile", "Users", new { username = model.Username });
+            return RedirectToAction("UserProfile", "Users", new { username = model.Username });
         }
     }
 }

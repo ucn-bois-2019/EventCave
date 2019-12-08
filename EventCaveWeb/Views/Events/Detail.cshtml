@@ -86,12 +86,16 @@
                 }
             )
             <div class="media">
-                <img src="https://images.weserv.nl?url=https://images.pexels.com/photos/372042/pexels-photo-372042.jpeg&h=92&w=92&fit=cover"
-                     alt="Jack London"
-                     class="rounded-circle mr-4" />
+                <a href="@Url.Action("UserProfile", "Users", new { username = Model.Host.UserName })">
+                    <img src="@String.Format("https://images.weserv.nl?url={0}&h=192&w=192&fit=cover&output=gif&n=-1", Model.HostPicture.Link)"
+                         alt="@Model.Host.UserName"
+                         class="rounded-circle mr-4" />
+                </a>
                 <div class="media-body">
-                    <span class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</span>
-                    <p class="mb-0 text-muted">    
+                    <a href="@Url.Action("UserProfile", "Users", new { username = Model.Host.UserName })">
+                        <h5 class="font-weight-bolder">@Model.Host.FirstName @Model.Host.LastName</h5>
+                    </a>
+                    <p class="mb-0 text-muted">
                         @Model.Host.Bio
                     </p>
                 </div>

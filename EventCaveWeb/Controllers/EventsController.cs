@@ -39,7 +39,7 @@ namespace EventCaveWeb.Controllers
             {
                 events = events.Where(e => e.Categories.Any(c => model.SelectedCategoryIds.Contains(c.Id)));
             }
-            return View(events.ToList());   
+            return View(events.ToList());
         }
 
         [Route("Create")]
@@ -163,6 +163,7 @@ namespace EventCaveWeb.Controllers
                     Datetime = @event.Datetime,
                     Limit = @event.Limit,
                     Host = @event.Host,
+                    HostPicture = Imgur.Instance.GetImage(@event.Host.Picture),
                     AttendeeCount = @event.Attendees.Count,
                     SpacesLeft = @event.Limit - @event.Attendees.Count,
                     Categories = @event.Categories,
