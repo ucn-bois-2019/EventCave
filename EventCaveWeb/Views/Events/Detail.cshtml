@@ -19,8 +19,8 @@
             "~/Views/Shared/Partials/Title.cshtml",
             new ViewDataDictionary {
                 { "Title", Model.Name },
-                { "ActionTitle", User.Identity.IsAuthenticated ? "Edit event" : null },
-                { "ActionUrl", User.Identity.IsAuthenticated ? Url.Action("Edit", "Events", new { id = Model.Id }) : null }
+                { "ActionTitle", User.Identity.Name == Model.Host.UserName ? "Edit event" : null },
+                { "ActionUrl", User.Identity.Name == Model.Host.UserName ? Url.Action("Edit", "Events", new { id = Model.Id }) : null }
             }
         )
         <!-- Categories -->

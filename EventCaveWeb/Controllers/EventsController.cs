@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EventCaveWeb.Utils;
+using Core.Controllers;
+using static Core.Controllers.EventController;
 
 namespace EventCaveWeb.Controllers
 {
@@ -188,24 +190,23 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult Attend(int id)
         {
-            Event @event = null;
-            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
-            {
-                @event = db.Events.Find(id);
-                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-                UserEvent userEvent = new UserEvent()
-                {
-                    Event = @event,
-                    EventId = @event.Id,
-                    User = user,
-                    ApplicationUserId = user.Id
-                };
+            EventController eventController = new EventController();
+            EventEnrollmentResult result = eventController.UserEnroll(id, User.Identity.GetUserId());
 
-                @event.Attendees.Add(userEvent);
-                user.EventsEnrolledIn.Add(userEvent);
-                db.SaveChanges();
+            if (result == EventEnrollmentResult.Success)
+            {
+                Message.Create(Response, "You were successfully enrolled");
             }
-            return RedirectToAction("Detail", "Events", new { id = @event.Id });
+            else if (result == EventEnrollmentResult.NotEnoughPlaces)
+            {
+                Message.Create(Response, "No more places left at this event");
+            }
+            else
+            {
+                Message.Create(Response, "Something went wrong");
+            }
+
+            return RedirectToAction("Detail", "Events", new { id });
         }
 
         [Route("{id}/unattend")]
@@ -213,17 +214,18 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult Unattend(int id)
         {
-            Event @event = null;
-            using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
+            EventController eventController = new EventController();
+            EventEnrollmentResult result = eventController.UserEnrollRevert(id, User.Identity.GetUserId());
+
+            if (result == EventEnrollmentResult.Success)
             {
-                @event = db.Events.Find(id);
-                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-                UserEvent userEvent = db.UserEvents.Where(ue => ue.EventId == @event.Id && ue.ApplicationUserId == user.Id).First();
-                @event.Attendees.Remove(userEvent);
-                user.EventsEnrolledIn.Remove(userEvent);
-                db.SaveChanges();
+                Message.Create(Response, "Your enrollment was reverted");
             }
-            return RedirectToAction("Detail", "Events", new { id = @event.Id });
+            else
+            {
+                Message.Create(Response, "Something went wrong");
+            }
+            return RedirectToAction("Detail", "Events", new { id });
         }
     }
 }
