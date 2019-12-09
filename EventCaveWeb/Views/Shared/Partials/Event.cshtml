@@ -2,14 +2,14 @@
 
 <a href="@Url.Action("Detail", "Events", new { id = ViewBag.Id})" class="card shadow">
     <img class="card-img-top"
-         src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl ?? "https://via.placeholder.com/768")"
+         src="@String.Format("https://images.weserv.nl?url={0}&h=768&w=768&fit=cover&a=entropy", ViewBag.ImageUrl ?? "https://cdn.pixabay.com/photo/2017/08/04/07/57/calender-2579300_960_720.jpg")"
          alt="event-image.png" />
     <div class="card-body">
-        <h5 class="card-title font-weight-bold">@ViewBag.Title</h5>
+        <h5 class="card-title font-weight-bold" style="overflow: hidden; text-overflow:ellipsis; white-space:nowrap">@ViewBag.Title</h5>
         <div class="mb-2">
             @foreach (Category category in ViewBag.Categories)
             {
-                <div class="badge badge-primary">@category.Name</div>
+                <div class="badge badge-primary" style="overflow: hidden; text-overflow:ellipsis; white-space:nowrap">@category.Name</div>
             }
         </div>
         <div class="card-text text-muted">

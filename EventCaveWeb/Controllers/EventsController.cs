@@ -75,8 +75,8 @@ namespace EventCaveWeb.Controllers
                         Datetime = model.Datetime,
                         Limit = model.Limit,
                         Categories = model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any()
-                                     ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
-                                     : new List<Category>(),
+                            ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
+                            : new List<Category>(),
                         CreatedAt = DateTime.Now,
                         Host = db.Users.Find(User.Identity.GetUserId()),
                         Images = model.Images
@@ -84,8 +84,17 @@ namespace EventCaveWeb.Controllers
                     db.Events.Add(@event);
                     db.SaveChanges();
                     Message.Create(Response, "Event was successfully created.");
-                    return RedirectToAction("Detail", "Events", new { id = @event.Id });
+                    return RedirectToAction("Detail", "Events", new {id = @event.Id});
                 }
+            }
+            else
+            {
+                DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+                return View(new CreateUpdateEventViewModel
+                {
+                    Datetime = DateTime.Now,
+                    Categories = db.Categories.ToList()
+                });
             }
             return View();
         }

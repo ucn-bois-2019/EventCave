@@ -5,21 +5,35 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 
 namespace EventCaveWeb.ViewModels
 {
     public class CreateUpdateEventViewModel
     {
         public int Id { get; set; }
+
+        [StringLength(15)]
         [Required]
+        [Display(Name = "Title")]
+
         public string Name { get; set; }
+
+        [StringLength(25)]
         public string Images { get; set; }
+
+        [StringLength(10000)]
         public string Description { get; set; }
+
         [Required]
         public string Location { get; set; }
-        [Required]
+
+        [DataType(DataType.DateTime)]
         public DateTime Datetime { get; set; }
+
         public int Limit { get; set; }
+
+        [Required]
         public IEnumerable<Category> Categories { get; set; }
         [Display(Name = "Categories")]
         public IEnumerable<int> SelectedCategoryIds { get; set; }
