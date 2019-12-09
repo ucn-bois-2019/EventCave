@@ -63,7 +63,7 @@ namespace Core.Controllers
         {
             bool result = false;
 
-            if (@event.Limit > @event.Attendees.Count)
+            if (@event.Limit > @event.Attendees.Count || @event.Limit == 0)
             {
                 result = true;
             }

@@ -45,5 +45,24 @@ namespace Core.Test
             // Assert
             Assert.IsFalse(areSpacesAvailable, "The method should return false, because there are 0 spaces available");
         }
+
+        [TestMethod]
+        public void UserEnrollmentNegativeTestWithZeroLimit()
+        {
+            // Arrange
+            bool areSpacesAvailable = false;
+            EventController controller = new EventController();
+            Event @event = new Event()
+            {
+                Attendees = new List<UserEvent>(),
+                Limit = 0
+            };
+
+            // Act
+            areSpacesAvailable = controller.CheckAvailablePlaces(@event);
+
+            // Assert
+            Assert.IsTrue(areSpacesAvailable, "The method should return false, there are unlimited spaces available");
+        }
     }
 }
