@@ -86,6 +86,16 @@ namespace EventCaveWeb.Controllers
                     Message.Create(Response, "Event was successfully created.");
                     return RedirectToAction("Detail", "Events", new { id = @event.Id });
                 }
+               
+            }
+            else
+            {
+                DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
+                return View(new CreateUpdateEventViewModel
+                {
+                    Datetime = DateTime.Now,
+                    Categories = db.Categories.ToList()
+                });
             }
             return View();
         }

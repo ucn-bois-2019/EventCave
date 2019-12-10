@@ -32,7 +32,7 @@ namespace EventCaveWeb.ViewModels
 
         public int Limit { get; set; }
 
-        [Required]
+       
         public IEnumerable<Category> Categories { get; set; }
 
         [Display(Name = "Categories")]
