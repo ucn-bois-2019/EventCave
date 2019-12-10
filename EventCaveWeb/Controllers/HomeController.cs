@@ -23,6 +23,7 @@ namespace EventCaveWeb.Controllers
             {
                 Categories = db.Categories.ToList(),
                 RandomEvents = GetRandomEvents(db.Events, 4),
+                DateTime = DateTime.Now
             };
             return View(homeViewModel);
         }

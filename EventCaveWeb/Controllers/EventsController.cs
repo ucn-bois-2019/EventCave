@@ -21,25 +21,27 @@ namespace EventCaveWeb.Controllers
         [AllowAnonymous]
         public ActionResult Search([Bind(Include = "Keyword,Location,DateTime,SelectedCategoryIds")] HomeViewModel model)
         {
-            // TODO: MySQL does not support DBFunctions to truncate time and EF6 does not support Datetime type.
-            // Figure out or we are done. 
-            // https://stackoverflow.com/questions/7016765/currentutcdatetime-does-not-exist-entity-framework-and-mysql
-
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-            var events = db.Events.Include("Categories").AsQueryable();
-            if (model.Location != null)
+            var events = db.Events.Include("Categories").AsEnumerable();
+            return View(FilterEvents(events, model.Location, model.Keyword, model.SelectedCategoryIds));
+        }
+
+        public List<Event> FilterEvents(IEnumerable<Event> events, string location, string keyword, IEnumerable<int> categoryIds)
+        {
+            if (location != null)
             {
-                events = events.Where(e => e.Location.Equals(model.Location));
+                events = events.Where(e => e.Location.ToLower().Contains(location.ToLower()));
             }
-            if (model.Keyword != null)
+            if (keyword != null)
             {
-                events = events.Where(e => e.Name.Equals(model.Keyword));
+                events = events.Where(e => e.Name.ToLower().Contains(keyword.ToLower()));
             }
-            if (model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any())
+            if (categoryIds != null && categoryIds.Any())
             {
-                events = events.Where(e => e.Categories.Any(c => model.SelectedCategoryIds.Contains(c.Id)));
+                events = events.Where(e => e.Categories.Any(c => categoryIds.Contains(c.Id)));
             }
-            return View(events.ToList());
+
+            return events.ToList();
         }
 
         [Route("Create")]

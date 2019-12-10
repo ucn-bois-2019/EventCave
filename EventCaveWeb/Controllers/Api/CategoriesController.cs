@@ -1,8 +1,6 @@
 ﻿using EventCaveWeb.Database;
 using EventCaveWeb.Entities;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Http;
 using System.Web;

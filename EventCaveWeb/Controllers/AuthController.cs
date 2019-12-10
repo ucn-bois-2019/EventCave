@@ -98,7 +98,8 @@ namespace EventCaveWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     UserName = model.UserName,
