@@ -16,7 +16,6 @@ namespace EventCaveWeb.ViewModels
         [StringLength(15)]
         [Required]
         [Display(Name = "Title")]
-
         public string Name { get; set; }
 
         [StringLength(25)]
@@ -35,6 +34,7 @@ namespace EventCaveWeb.ViewModels
 
         [Required]
         public IEnumerable<Category> Categories { get; set; }
+
         [Display(Name = "Categories")]
         public IEnumerable<int> SelectedCategoryIds { get; set; }
     }

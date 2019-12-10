@@ -12,7 +12,7 @@ namespace EventCaveWeb.Controllers
     {
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult Index(Category category)
+        public ActionResult Index()
         {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             var categories = db.Categories.ToList();
