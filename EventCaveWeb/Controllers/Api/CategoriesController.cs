@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace EventCaveWeb.Controllers.Api
 {
+    [Authorize]
     public class CategoriesController : ApiController
     {
         [Route("Api/Categories")]

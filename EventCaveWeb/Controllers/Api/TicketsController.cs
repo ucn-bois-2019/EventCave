@@ -9,6 +9,7 @@ using System.Web.Http.Cors;
 namespace EventCaveWeb.Controllers.Api
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [Authorize]
     public class TicketsController : ApiController
     {
         [Route("Api/Tickets")]
