@@ -1,4 +1,4 @@
-﻿using EventCaveWeb.Models;
+﻿using EventCaveWeb.Entities;
 using EventCaveWeb.Utils;
 using System;
 using System.Collections.Generic;

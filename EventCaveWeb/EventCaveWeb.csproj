@@ -312,11 +312,11 @@
       <DependentUpon>201912041410290_Fix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\Ticket.cs" />
-    <Compile Include="Models\UserEvent.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\Ticket.cs" />
+    <Compile Include="Entities\UserEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\BrowserJsonFormatter.cs" />
@@ -389,12 +389,6 @@
     <EmbeddedResource Include="Migrations\201912041410290_Fix.resx">
       <DependentUpon>201912041410290_Fix.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{FF6832AF-DD9B-49C4-9E71-8ADA104D360A}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

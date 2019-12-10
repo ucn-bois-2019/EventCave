@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 
 namespace EventCaveWeb
 {

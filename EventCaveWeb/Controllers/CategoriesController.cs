@@ -2,7 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using Microsoft.AspNet.Identity.Owin;
 
 namespace EventCaveWeb.Controllers

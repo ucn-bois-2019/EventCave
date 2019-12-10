@@ -1,5 +1,5 @@
 ﻿using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -10,8 +10,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EventCaveWeb.Utils;
-using Core.Controllers;
-using static Core.Controllers.EventController;
 
 namespace EventCaveWeb.Controllers
 {
@@ -75,8 +73,8 @@ namespace EventCaveWeb.Controllers
                         Datetime = model.Datetime,
                         Limit = model.Limit,
                         Categories = model.SelectedCategoryIds != null && model.SelectedCategoryIds.Any()
-                            ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
-                            : new List<Category>(),
+                                     ? db.Categories.Where(c => model.SelectedCategoryIds.Contains(c.Id)).ToList()
+                                     : new List<Category>(),
                         CreatedAt = DateTime.Now,
                         Host = db.Users.Find(User.Identity.GetUserId()),
                         Images = model.Images
@@ -84,17 +82,8 @@ namespace EventCaveWeb.Controllers
                     db.Events.Add(@event);
                     db.SaveChanges();
                     Message.Create(Response, "Event was successfully created.");
-                    return RedirectToAction("Detail", "Events", new {id = @event.Id});
+                    return RedirectToAction("Detail", "Events", new { id = @event.Id });
                 }
-            }
-            else
-            {
-                DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
-                return View(new CreateUpdateEventViewModel
-                {
-                    Datetime = DateTime.Now,
-                    Categories = db.Categories.ToList()
-                });
             }
             return View();
         }
@@ -165,6 +154,7 @@ namespace EventCaveWeb.Controllers
             using (DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>())
             {
                 Event @event = db.Events.Find(id);
+
                 EventDetailViewModel EventDetailViewModel = new EventDetailViewModel()
                 {
                     Id = @event.Id,
@@ -180,7 +170,9 @@ namespace EventCaveWeb.Controllers
                     Categories = @event.Categories,
                     Images = Imgur.Instance.GetAlbumImages(@event.Images)
                 };
+
                 bool going = false;
+
                 if (User.Identity.IsAuthenticated)
                 {
                     ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
@@ -189,6 +181,7 @@ namespace EventCaveWeb.Controllers
                         going = true;
                     }
                 }
+
                 EventDetailViewModel.Going = going;
                 return View(EventDetailViewModel);
             }
@@ -199,8 +192,7 @@ namespace EventCaveWeb.Controllers
         [Authorize]
         public ActionResult Attend(int id)
         {
-            EventController eventController = new EventController();
-            EventEnrollmentResult result = eventController.UserEnroll(id, User.Identity.GetUserId());
+            EventEnrollmentResult result = UserEnroll(id, User.Identity.GetUserId());
 
             if (result == EventEnrollmentResult.Success)
             {
@@ -218,13 +210,12 @@ namespace EventCaveWeb.Controllers
             return RedirectToAction("Detail", "Events", new { id });
         }
 
-        [Route("{id}/unattend")]
+        [Route("{id}/Unattend")]
         [HttpGet]
         [Authorize]
         public ActionResult Unattend(int id)
         {
-            EventController eventController = new EventController();
-            EventEnrollmentResult result = eventController.UserEnrollRevert(id, User.Identity.GetUserId());
+            EventEnrollmentResult result = UserEnrollRevert(id, User.Identity.GetUserId());
 
             if (result == EventEnrollmentResult.Success)
             {
@@ -234,7 +225,74 @@ namespace EventCaveWeb.Controllers
             {
                 Message.Create(Response, "Something went wrong");
             }
+
             return RedirectToAction("Detail", "Events", new { id });
+        }
+
+        public enum EventEnrollmentResult
+        {
+            Success, UnknownError, NotEnoughPlaces
+        }
+
+        public EventEnrollmentResult UserEnroll(object eventId, object userId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Event @event = db.Events.Find(eventId);
+                ApplicationUser user = db.Users.Find(userId);
+                if (@event == null || user == null)
+                {
+                    return EventEnrollmentResult.UnknownError;
+                }
+
+                if (!CheckAvailablePlaces(@event))
+                {
+                    return EventEnrollmentResult.NotEnoughPlaces;
+                }
+
+                UserEvent userEvent = new UserEvent()
+                {
+                    ApplicationUserId = user.Id,
+                    User = user,
+                    EventId = @event.Id,
+                    Event = @event
+                };
+
+                db.UserEvents.Add(userEvent);
+                db.SaveChanges();
+            }
+
+            return EventEnrollmentResult.Success;
+        }
+
+        public EventEnrollmentResult UserEnrollRevert(object eventId, object userId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                UserEvent userEvent = db.UserEvents.Find(userId, eventId);
+
+                if (userEvent == null)
+                {
+                    return EventEnrollmentResult.UnknownError;
+                }
+
+                db.UserEvents.Remove(userEvent);
+                db.SaveChanges();
+            }
+
+            return EventEnrollmentResult.Success;
+        }
+
+        public bool CheckAvailablePlaces(Event @event)
+        {
+            bool result = false;
+
+            if (@event.Limit > @event.Attendees.Count || @event.Limit == 0)
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

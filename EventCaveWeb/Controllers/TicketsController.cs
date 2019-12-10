@@ -1,5 +1,5 @@
 ﻿using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using EventCaveWeb.Utils;
 using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity;
