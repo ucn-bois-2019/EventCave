@@ -1,5 +1,5 @@
 ﻿using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using EventCaveWeb.ViewModels;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -23,6 +23,7 @@ namespace EventCaveWeb.Controllers
             {
                 Categories = db.Categories.ToList(),
                 RandomEvents = GetRandomEvents(db.Events, 4),
+                DateTime = DateTime.Now
             };
             return View(homeViewModel);
         }

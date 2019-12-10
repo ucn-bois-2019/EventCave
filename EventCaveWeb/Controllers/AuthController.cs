@@ -5,7 +5,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using EventCaveWeb.ViewModels;
 using EventCaveWeb.Utils;
 
@@ -98,7 +98,8 @@ namespace EventCaveWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {
+                var user = new ApplicationUser
+                {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     UserName = model.UserName,

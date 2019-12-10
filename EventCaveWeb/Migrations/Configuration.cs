@@ -1,4 +1,4 @@
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using System;
 using System.Data.Entity.Migrations;
 using System.Linq;

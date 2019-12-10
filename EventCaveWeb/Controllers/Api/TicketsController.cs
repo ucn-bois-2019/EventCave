@@ -1,5 +1,5 @@
 ﻿using EventCaveWeb.Database;
-using EventCaveWeb.Models;
+using EventCaveWeb.Entities;
 using Microsoft.AspNet.Identity.Owin;
 using System.Linq;
 using System.Web;

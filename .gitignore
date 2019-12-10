@@ -257,10 +257,9 @@ _Pvt_Extensions
 # manual '/obj', '/bin' removal
 EventCaveWeb/bin/
 EventCaveWeb/obj/
-Core/bin
-Core/obj/
-Core.Test/bin
-Core.Test/obj/
+EventCaveWeb.Test/bin/
+EventCaveWeb.Test/obj/
 
 # .csproj.user
 EventCaveWeb/EventCaveWeb.csproj.user
+EventCaveWeb/EventCaveWeb.Test.csproj.user

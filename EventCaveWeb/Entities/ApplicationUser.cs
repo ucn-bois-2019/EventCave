@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace EventCaveWeb.Models
+namespace EventCaveWeb.Entities
 {
     public class ApplicationUser : IdentityUser
     {

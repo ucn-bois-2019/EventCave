@@ -1,9 +1,9 @@
-﻿using Core.Controllers;
-using Core.Models;
+﻿using EventCaveWeb.Controllers;
+using EventCaveWeb.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
-namespace Core.Test
+namespace EventCaveWeb.Test
 {
     [TestClass]
     public class EventEnrollmentTest
@@ -13,7 +13,7 @@ namespace Core.Test
         {
             // Arrange
             bool areSpacesAvailable = false;
-            EventController controller = new EventController();
+            EventsController controller = new EventsController();
             Event @event = new Event()
             {
                 Attendees = new List<UserEvent>(),
@@ -32,7 +32,7 @@ namespace Core.Test
         {
             // Arrange
             bool areSpacesAvailable = false;
-            EventController controller = new EventController();
+            EventsController controller = new EventsController();
             Event @event = new Event()
             {
                 Attendees = new List<UserEvent>() { new UserEvent(), new UserEvent(), new UserEvent() },
@@ -51,7 +51,7 @@ namespace Core.Test
         {
             // Arrange
             bool areSpacesAvailable = false;
-            EventController controller = new EventController();
+            EventsController controller = new EventsController();
             Event @event = new Event()
             {
                 Attendees = new List<UserEvent>(),

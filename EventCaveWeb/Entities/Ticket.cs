@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EventCaveWeb.Models
+namespace EventCaveWeb.Entities
 {
     public class Ticket
     {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EventCaveWeb.Models
+namespace EventCaveWeb.Entities
 {
     public class Event
     {
