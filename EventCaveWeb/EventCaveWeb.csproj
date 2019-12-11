@@ -318,6 +318,7 @@
     <Compile Include="Entities\Ticket.cs" />
     <Compile Include="Entities\UserEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\ApplicationOAuthProvider.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utils\BrowserJsonFormatter.cs" />
     <Compile Include="Utils\Imgur.cs" />

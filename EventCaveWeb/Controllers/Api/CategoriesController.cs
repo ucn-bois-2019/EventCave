@@ -43,7 +43,7 @@ namespace EventCaveWeb.Controllers.Api
             return Ok(categoryDto);
         }
 
-        /* [Route("Api/Categories")]
+        [Route("Api/Categories")]
         [HttpPost]
         public IHttpActionResult Post([FromBody] CategoryDto categoryDto)
         {
@@ -51,15 +51,19 @@ namespace EventCaveWeb.Controllers.Api
             {
                 return BadRequest(ModelState);
             }
+
             DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>();
+
             Category category = new Category()
             {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
                 Image = categoryDto.Image
             };
+
             db.Categories.Add(category);
             db.SaveChanges();
+
             return Ok(
                 new
                 {
@@ -69,14 +73,69 @@ namespace EventCaveWeb.Controllers.Api
             );
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [Route("Api/Categories/{id}")]
+        [HttpPut]
+        public IHttpActionResult Put(int id, [FromBody] CategoryDto categoryDto)
         {
+            Category category = null;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            using (DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>())
+            {
+                category = db.Categories.Find(id);
+
+                if (category == null)
+                {
+                    return BadRequest("Category not found.");
+                }
+
+                category.Name = categoryDto.Name;
+                category.Description = categoryDto.Description;
+                category.Image = categoryDto.Image;
+
+                db.SaveChanges();
+            }
+
+            return Ok(
+                new
+                {
+                    Status = 200,
+                    Message = "Category was successfully updated."
+                }
+            );
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        [Route("Api/Categories/{id}")]
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
         {
-        } */
+            Category category;
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            using (DatabaseContext db = HttpContext.Current.GetOwinContext().Get<DatabaseContext>())
+            {
+                category = db.Categories.Find(id);
+
+                if (category == null)
+                {
+                    return BadRequest(string.Format("Category ID {0} not found.", id));
+                }
+
+                db.Categories.Remove(category);
+                db.SaveChanges();
+            }
+
+            return Ok(
+                new
+                {
+                    Status = 200,
+                    Message = "Category was successfully deleted."
+                }
+            );
+        }
     }
 }
