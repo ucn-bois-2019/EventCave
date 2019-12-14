@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using EventCaveWeb.Utils;
+using System.Data.Entity;
 
 namespace EventCaveWeb.Controllers
 {
@@ -23,10 +24,10 @@ namespace EventCaveWeb.Controllers
         {
             DatabaseContext db = HttpContext.GetOwinContext().Get<DatabaseContext>();
             var events = db.Events.Include("Categories").AsEnumerable();
-            return View(FilterEvents(events, model.Location, model.Keyword, model.SelectedCategoryIds));
+            return View(FilterEvents(events, model.Location, model.Keyword, model.DateTime, model.SelectedCategoryIds));
         }
 
-        public List<Event> FilterEvents(IEnumerable<Event> events, string location, string keyword, IEnumerable<int> categoryIds)
+        public List<Event> FilterEvents(IEnumerable<Event> events, string location, string keyword, DateTime datetime, IEnumerable<int> categoryIds)
         {
             if (location != null)
             {
@@ -40,7 +41,10 @@ namespace EventCaveWeb.Controllers
             {
                 events = events.Where(e => e.Categories.Any(c => categoryIds.Contains(c.Id)));
             }
-
+            if (datetime.Date.ToShortDateString() != "1/1/0001")
+            {
+                events = events.Where(e => datetime.Date == e.Datetime.Date);
+            }
             return events.ToList();
         }
 
